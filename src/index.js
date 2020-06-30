@@ -4,6 +4,7 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import './site.sass'
 import 'uikit/dist/js/uikit'
+import 'fontsource-roboto'
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -12,7 +13,6 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import SetData from './data/setters/SetData';
 import UnsetData from './data/setters/UnsetData';
 import ServiceList from './components/service/ServiceList';
-
 
 const store = createStore(
 	(state = {}, action) => state,
