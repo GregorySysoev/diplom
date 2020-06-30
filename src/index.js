@@ -5,9 +5,28 @@ import * as serviceWorker from './serviceWorker'
 import './site.sass'
 import 'uikit/dist/js/uikit'
 
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import { BrowserRouter, Route } from 'react-router-dom'
+import SetData from './data/setters/SetData';
+import UnsetData from './data/setters/UnsetData';
+
+
+const store = createStore(
+	(state = {}, action) => state,
+	JSON.parse(localStorage.getItem('data')),
+)
+
 ReactDOM.render(
 	<React.StrictMode>
-		<App/>
+		<Provider store={store}>
+			<BrowserRouter>
+				<Route exact path="/data/set" component={SetData}/>
+				<Route exact path="/data/unset" component={UnsetData}/>
+				<Route exact path="/" component={App}/>
+			</BrowserRouter>
+		</Provider>
 	</React.StrictMode>,
 	document.getElementById('root'),
 )
