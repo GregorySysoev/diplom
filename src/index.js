@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
 import SetData from './data/setters/SetData';
 import UnsetData from './data/setters/UnsetData';
+import ServiceList from './components/service/ServiceList';
 
 
 const store = createStore(
@@ -24,6 +25,7 @@ ReactDOM.render(
 			<BrowserRouter>
 				<Route exact path="/data/set" component={SetData}/>
 				<Route exact path="/data/unset" component={UnsetData}/>
+				<Route exact path="/list" component={ServiceList}/>
 				<Route exact path="/" component={App}/>
 			</BrowserRouter>
 		</Provider>
