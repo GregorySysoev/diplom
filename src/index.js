@@ -6,30 +6,9 @@ import './site.sass'
 import 'uikit/dist/js/uikit'
 import 'fontsource-roboto'
 
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-
-import { BrowserRouter, Route } from 'react-router-dom'
-import SetData from './data/setters/SetData';
-import UnsetData from './data/setters/UnsetData';
-import ServiceListPage from "./components/stubs/service/ServiceListPage";
-
-
-const store = createStore(
-	(state = {}, action) => state,
-	JSON.parse(localStorage.getItem('data')),
-)
-
 ReactDOM.render(
 	<React.StrictMode>
-		<Provider store={store}>
-			<BrowserRouter>
-				<Route exact path="/data/set" component={SetData}/>
-				<Route exact path="/data/unset" component={UnsetData}/>
-				<Route exact path="/stubs/service/list" component={ServiceListPage}/>
-				<Route exact path="/" component={App}/>
-			</BrowserRouter>
-		</Provider>
+		<App/>
 	</React.StrictMode>,
 	document.getElementById('root'),
 )
