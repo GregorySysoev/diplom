@@ -95,13 +95,13 @@ class NewFood extends Component {
 								<div className="uk-child-width-1-1 uk-child-width-1-3@m uk-grid"
 									 hidden={!this.state.isNutritional}>
 									<div className="uk-margin-bottom">
-										<label className="uk-form-label">Углеводы </label>
+										<label className="uk-form-label">Белки </label>
 										<div className="uk-form-controls">
 											<input type="number"
 												   className="uk-input"
-												   name="carbohydrates"
+												   name="protein"
 												   onChange={this.handleChange}
-												   value={this.state.carbohydrates}/>
+												   value={this.state.protein}/>
 										</div>
 									</div>
 									<div className="uk-margin-bottom">
@@ -115,13 +115,13 @@ class NewFood extends Component {
 										</div>
 									</div>
 									<div className="uk-margin-bottom">
-										<label className="uk-form-label">Белки </label>
+										<label className="uk-form-label">Углеводы </label>
 										<div className="uk-form-controls">
 											<input type="number"
 												   className="uk-input"
-												   name="protein"
+												   name="carbohydrates"
 												   onChange={this.handleChange}
-												   value={this.state.protein}/>
+												   value={this.state.carbohydrates}/>
 										</div>
 									</div>
 								</div>
