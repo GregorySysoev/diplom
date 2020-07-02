@@ -1,5 +1,6 @@
 import React from 'react'
 import './newservice.sass'
+import PhotoUploader from "./PhotoUploader";
 
 export default class NewService extends React.Component {
 	constructor(props) {
@@ -14,13 +15,42 @@ export default class NewService extends React.Component {
 			minutesOfExecution: '',
 			hoursOfWaiting: '',
 			minutesOfWaiting: '',
-			photo: '',
+			photoIds: [],
+			mainPhotoId: null,
+			lastPhotoId: 0,
 		}
 	}
 
 	handleChange = event => {
 		console.log(event.target.value)
 		this.setState({[event.target.name]: event.target.value})
+	}
+
+	addPhoto = id => {
+		this.setState(prevState => {
+			const newState = {
+				photoIds: [...prevState.photoIds, id],
+				lastPhotoId: id,
+			};
+			if (prevState.photoIds.length === 0) {
+				newState.mainPhotoId = id;
+			}
+			return newState;
+		});
+	}
+
+	removePhoto = id => {
+		this.setState(prevState => {
+			const newState = { photoIds: prevState.photoIds.filter(photoId => photoId !== id) };
+			if (prevState.mainPhotoId === id) {
+				newState.mainPhotoId = prevState.photoIds[0] || null;
+			}
+			return newState;
+		});
+	}
+
+	setMainPhoto = id => {
+		this.setState({ mainPhotoId: id });
 	}
 
 	render() {
@@ -135,9 +165,14 @@ export default class NewService extends React.Component {
 						</div>
 					</div>
 					<div className="uk-width-2-5@m">
-						<div className="service-photoChooser">
-							<button className="uk-button uk-button-primary">Загрузить фото</button>
-						</div>
+						<PhotoUploader
+							setMain={this.setMainPhoto}
+							addPhoto={this.addPhoto}
+							removePhoto={this.removePhoto}
+							photoIds={this.state.photoIds}
+							mainPhotoId={this.state.mainPhotoId}
+							lastPhotoId={this.state.lastPhotoId}
+						/>
 					</div>
 					<div>
 						<button className="uk-button uk-button-primary" type="submit">Далее

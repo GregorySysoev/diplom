@@ -6,6 +6,12 @@ import './site.sass'
 import 'uikit/dist/js/uikit'
 import 'fontsource-roboto'
 
+// >>> проброс стилей для иконок uikit
+import UIkit from 'uikit'
+import Icons from 'uikit/dist/js/uikit-icons'
+UIkit.use(Icons)
+// <<< проброс стилей для иконок uikit
+
 ReactDOM.render(
 	<React.StrictMode>
 		<App/>
