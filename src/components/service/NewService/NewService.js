@@ -96,7 +96,8 @@ export default class NewService extends React.Component {
 										   type="number"
 										   name="price"
 										   onChange={this.handleChange}
-										   placeholder=""/>
+										   placeholder=""
+										   step={0.01}/>
 								</div>
 							</div>
 						)}

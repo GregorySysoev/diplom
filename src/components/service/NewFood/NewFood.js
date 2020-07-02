@@ -42,7 +42,7 @@ class NewFood extends Component {
 				<form className="uk-form-horizontal uk-child-width-1-2@m uk-margin-bottom" data-uk-grid="">
 					<div>
 						<div className="uk-margin-bottom">
-							<label className="uk-form-label">Ингридиенты</label>
+							<label className="uk-form-label">Ингредиенты</label>
 							<div className="uk-form-controls">
 								<select className="uk-select" name="ingredients" onChange={this.handleChange}
 										value={this.state.ingredients}>
@@ -129,36 +129,39 @@ class NewFood extends Component {
 						</div>
 					</div>
 					<div>
-						<div className="uk-margin-bottom">
-							<label className="uk-form-label">Порция </label>
-							<div className="uk-form-controls">
-								<input type="number"
-									   className="uk-input"
-									   name="size"
-									   onChange={this.handleChange}
-									   value={this.state.size}/>
+						<fieldset style={{ border: '1px dashed #ccc' }}>
+							<h5>Порция</h5>
+							<div className="uk-margin-bottom">
+								<label className="uk-form-label">Размер </label>
+								<div className="uk-form-controls">
+									<input type="number"
+										   className="uk-input"
+										   name="size"
+										   onChange={this.handleChange}
+										   value={this.state.size}/>
+								</div>
 							</div>
-						</div>
-						<div className="uk-margin-bottom">
-							<label className="uk-form-label">Единицы </label>
-							<div className="uk-form-controls">
-								<select className="uk-select" name="units" onChange={this.handleChange}
-										value={this.state.units}>
-									<option value="gr">Грамм</option>
-									<option value="kg">Килограмм</option>
-								</select>
+							<div className="uk-margin-bottom">
+								<label className="uk-form-label">Единица измерения </label>
+								<div className="uk-form-controls">
+									<select className="uk-select" name="units" onChange={this.handleChange}
+											value={this.state.units}>
+										<option value="gr">Грамм</option>
+										<option value="kg">Килограмм</option>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div className="uk-margin-bottom">
-							<label className="uk-form-label uk-margin-remove-top">Цена в рублях </label>
-							<div className="uk-form-controls">
-								<input type="number"
-									   className="uk-input"
-									   name="price"
-									   onChange={this.handleChange}
-									   value={this.state.price}/>
+							<div className="uk-margin-bottom">
+								<label className="uk-form-label uk-margin-remove-top">Цена </label>
+								<div className="uk-form-controls">
+									<input type="number"
+										   className="uk-input"
+										   name="price"
+										   onChange={this.handleChange}
+										   value={this.state.price}/>
+								</div>
 							</div>
-						</div>
+						</fieldset>
 						<div>
 							<Button label="Добавить ещё порцию"/>
 						</div>
