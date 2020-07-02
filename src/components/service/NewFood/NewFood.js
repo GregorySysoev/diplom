@@ -85,43 +85,50 @@ class NewFood extends Component {
 						<div className="uk-margin-bottom">
 							<div className="uk-margin uk-grid-large uk-child-width-auto uk-grid">
 								<div className="uk-margin-bottom">
-									<label>Указание пищевой ценности <input className="uk-checkbox"
-																			type="checkbox"
-																			name="isNutritional"
-																			checked={this.state.isNutritional}
-																			onChange={this.handleChange}/>
+									<label>Указание пищевой ценности (на 100 гр продукта)
+										{' '}<input className="uk-checkbox"
+											type="checkbox"
+											name="isNutritional"
+											checked={this.state.isNutritional}
+											onChange={this.handleChange}/>
 									</label>
 								</div>
 								<div className="uk-child-width-1-1 uk-child-width-1-3@m uk-grid"
 									 hidden={!this.state.isNutritional}>
 									<div className="uk-margin-bottom">
-										<label className="uk-form-label">Белки </label>
+										<label className="uk-form-label">Белки (гр)</label>
 										<div className="uk-form-controls">
 											<input type="number"
 												   className="uk-input"
 												   name="protein"
 												   onChange={this.handleChange}
-												   value={this.state.protein}/>
+												   value={this.state.protein}
+												   step={0.1}
+												   min={0}/>
 										</div>
 									</div>
 									<div className="uk-margin-bottom">
-										<label className="uk-form-label">Жиры </label>
+										<label className="uk-form-label">Жиры (гр)</label>
 										<div className="uk-form-controls">
 											<input type="number"
 												   className="uk-input"
 												   name="fat"
 												   onChange={this.handleChange}
-												   value={this.state.fat}/>
+												   value={this.state.fat}
+												   step={0.1}
+												   min={0}/>
 										</div>
 									</div>
 									<div className="uk-margin-bottom">
-										<label className="uk-form-label">Углеводы </label>
+										<label className="uk-form-label">Углеводы (гр)</label>
 										<div className="uk-form-controls">
 											<input type="number"
 												   className="uk-input"
 												   name="carbohydrates"
 												   onChange={this.handleChange}
-												   value={this.state.carbohydrates}/>
+												   value={this.state.carbohydrates}
+												   step={0.1}
+												   min={0}/>
 										</div>
 									</div>
 								</div>
