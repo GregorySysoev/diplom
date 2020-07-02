@@ -6,6 +6,7 @@ import ServiceListPage from "./components/service/ServiceListPage";
 import HotelEntry from "./components/HotelEntry/HotelEntry"
 import Login from "./components/Login/Login"
 import AvailableActions from './components/AvailableActions/AvailableActions';
+import NewFood from "./components/service/NewFood/NewFood";
 
 export default function App() {
 	return (
@@ -16,7 +17,8 @@ export default function App() {
 				<Route exact path='/hotel' component={HotelEntry}/>
 				<Route exact path='/actions' component={AvailableActions}/>
 				<Route exact path="/service/list" component={ServiceListPage}/>
-				<Route exact path="/service/new" component={NewService}/>
+				<Route exact path="/service/new-service" component={NewService}/>
+				<Route exact path="/service/new-food" component={NewFood}/>
 			</BrowserRouter>
 		</div>
 	)
