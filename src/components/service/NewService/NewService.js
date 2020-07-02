@@ -87,17 +87,19 @@ export default class NewService extends React.Component {
 								</select>
 							</div>
 						</div>
-						<div className="uk-margin">
-							<label className="uk-form-label" htmlFor="service-price">Стоимость: </label>
-							<div className="uk-form-controls">
-								<input className="uk-input"
-									   id="service-price"
-									   type="number"
-									   name="price"
-									   onChange={this.handleChange}
-									   placeholder=""/>
+						{this.state.type !== 'food' && (
+							<div className="uk-margin">
+								<label className="uk-form-label" htmlFor="service-price">Стоимость: </label>
+								<div className="uk-form-controls">
+									<input className="uk-input"
+										   id="service-price"
+										   type="number"
+										   name="price"
+										   onChange={this.handleChange}
+										   placeholder=""/>
+								</div>
 							</div>
-						</div>
+						)}
 						<div className="uk-margin">
 							<label className="uk-form-label" htmlFor="service-hoursOfExecution">Время вып.: </label>
 							<div className="uk-form-controls uk-flex">

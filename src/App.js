@@ -18,9 +18,9 @@ export default function App() {
 				<Route exact path='/hotel' component={HotelEntry}/>
 				<Route exact path='/actions' component={AvailableActions}/>
 				<Route exact path="/service/list" component={ServiceListPage}/>
-				<Route exact path="/service/new-service" component={NewService}/>
-				<Route exact path="/service/new-food" component={NewFood}/>
+				<Route exact path="/service/new" component={NewService}/>
 				<Route exact path="/service/new/availability" component={TimeRange}/>
+				<Route exact path="/service/new/food-additionals" component={NewFood}/>
 			</BrowserRouter>
 		</div>
 	)

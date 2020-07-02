@@ -16,6 +16,7 @@ const headCells = [
     { id: 'name', label: 'Название' },
     { id: 'category', label: 'Категория' },
     { id: 'price', label: 'Цена' },
+    { id: 'delete', label: '' },
 ];
 
 function createData(name, category, price) {
