@@ -5,7 +5,6 @@ import ServiceServiceList from "./ServiceServiceList";
 const SERVICE_FOOD = 1;
 const SERVICE_SERVICE = 2;
 
-// TODO: оформить вёрстку
 export default function ServiceListPage() {
     const [serviceType, setServiceType] = React.useState(SERVICE_FOOD);
 
@@ -14,39 +13,44 @@ export default function ServiceListPage() {
     };
 
     return <>
-        <label>
-            <input
-                type="radio"
-                name="serviceType"
-                value={SERVICE_SERVICE}
-                checked={serviceType === SERVICE_SERVICE}
-                onChange={handleServiceTypeChange}
-            /> Сервис
-        </label>
-        <br /> {/* TODO: сделать через CSS */}
-        <label>
-            <input
-                type="radio"
-                name="serviceType"
-                value={SERVICE_FOOD}
-                checked={serviceType === SERVICE_FOOD}
-                onChange={handleServiceTypeChange}
-            /> Напитки и еда
-        </label>
-        <br /> {/* TODO: сделать через CSS */}
+        <div className="uk-container uk-margin-top uk-margin-bottom">
+            <h2>Услуги</h2>
+            <div>
+                <div className="uk-margin uk-child-width-auto uk-flex uk-flex-column">
+                    <label>
+                        <input
+                            type="radio"
+                            name="serviceType"
+                            value={SERVICE_SERVICE}
+                            checked={serviceType === SERVICE_SERVICE}
+                            onChange={handleServiceTypeChange}
+                        /> Сервис
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="serviceType"
+                            value={SERVICE_FOOD}
+                            checked={serviceType === SERVICE_FOOD}
+                            onChange={handleServiceTypeChange}
+                        /> Напитки и еда
+                    </label>
+                </div>
+            </div>
 
-        {serviceType === SERVICE_FOOD ? (
-            <FoodServiceList />
-        ) : serviceType === SERVICE_SERVICE ? (
-            <ServiceServiceList />
-        ) : (
-            ''
-        )}
-        <button className="uk-button uk-button-primary" type="button">
-            Добавить услугу
-        </button>
-        <button className="uk-button uk-button-primary" type="button">
-            Добавить категорию
-        </button>
+            {serviceType === SERVICE_FOOD ? (
+                <FoodServiceList />
+            ) : serviceType === SERVICE_SERVICE ? (
+                <ServiceServiceList />
+            ) : (
+                ''
+            )}
+            <button className="uk-button uk-button-primary" type="button">
+                Добавить услугу
+            </button>{' '}
+            <button className="uk-button uk-button-primary" type="button">
+                Добавить категорию
+            </button>
+        </div>
     </>;
 }

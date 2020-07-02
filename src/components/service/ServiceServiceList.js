@@ -51,11 +51,6 @@ export default function FoodServiceList() {
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <Toolbar>
-                    <Typography variant="h6" component="div">
-                        Сервис
-                    </Typography>
-                </Toolbar>
                 <TableContainer>
                     <Table
                         className={classes.table}
