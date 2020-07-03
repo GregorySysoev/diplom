@@ -9,7 +9,9 @@ import AvailableActions from './components/AvailableActions/AvailableActions';
 import NewFood from "./components/service/NewFood/NewFood";
 import TimeRange from "./components/service/TimeRange/TimeRange";
 import Options from "./components/service/NewFood/Options";
-import ServlceOrderListPage from "./components/service/order/ServiceOrderListPage";
+import ServiceOrderListPage from "./components/service/order/ServiceOrderListPage";
+import ServiceOrderDetailsPage from "./components/service/order/ServiceOrderDetailsPage";
+import FoodOrderDetailsPage from "./components/service/order/FoodOrderDetailsPage";
 
 export default function App() {
 	return (
@@ -24,7 +26,9 @@ export default function App() {
 				<Route exact path="/service/new/availability" component={TimeRange}/>
 				<Route exact path="/service/new/food-additionals" component={NewFood}/>
 				<Route exact path="/service/new/food-options" component={Options}/>
-				<Route exact path="/service/order/list" component={ServlceOrderListPage}/>
+				<Route exact path="/service/order/list" component={ServiceOrderListPage}/>
+				<Route exact path="/service/order/details-service" component={ServiceOrderDetailsPage}/>
+				<Route exact path="/service/order/details-food" component={FoodOrderDetailsPage}/>
 			</BrowserRouter>
 		</div>
 	)

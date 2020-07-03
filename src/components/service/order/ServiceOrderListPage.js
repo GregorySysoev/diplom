@@ -21,7 +21,7 @@ function createData(name, room, serviceType, date) {
     return { name, room, serviceType, date };
 }
 
-// здесь можно добавить данные (лучше в порядке возрастания названия)
+// здесь можно добавить данные (в порядке возрастания даты, сгруппировать по номеру заказа)
 const pendingRows = [
     createData('Вареники со сметаной (pending)', '101', serviceTypes.SERVICE, '24.07.2020 11:53'),
 ];
