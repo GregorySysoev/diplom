@@ -4,6 +4,7 @@ import Button from '../../Button';
 import './styles.sass';
 import * as serviceTypes from '../types';
 import * as orderStatuses from './statuses';
+import { v4 as uuidv4 } from 'uuid';
 
 const CommonServiceOrderDetailsPage = props => {
     const [currentStatus, setCurrentStatus] = React.useState(orderStatuses.COMPLETED);
@@ -11,6 +12,8 @@ const CommonServiceOrderDetailsPage = props => {
     const handleOrderStatusChange = event => {
         setCurrentStatus(+event.target.value);
     };
+
+    const alreadyProcessed = props.status && props.status !== orderStatuses.PENDING;
 
     return (
         <div className="uk-container uk-margin-top uk-margin-bottom">
@@ -25,9 +28,15 @@ const CommonServiceOrderDetailsPage = props => {
                 <p><span className="uk-text-muted">Номер заказа: </span>{`№${props.orderId}`}</p>
                 <p><span className="uk-text-muted">Название услуги: </span>{props.serviceName}</p>
                 {props.serviceType === serviceTypes.FOOD && (
-                    <p><span className="uk-text-muted">Размер порции: </span>{`${props.portion.size} ${props.portion.unit}`}</p>
+                    <p>
+                        <span className="uk-text-muted">Размер порции: </span>
+                        {`${props.portion.size} ${props.portion.unit}`}
+                    </p>
                 )}
-                <p><span className="uk-text-muted">Комментарий: </span>{props.customerComment ? props.customerComment : <i className="uk-text-muted">пусто</i>}</p>
+                <p>
+                    <span className="uk-text-muted">Комментарий: </span>
+                    {props.customerComment ? props.customerComment : <i className="uk-text-muted">пусто</i>}
+                </p>
                 {props.serviceType === serviceTypes.SERVICE && (
                     <p><span className="uk-text-muted">Цена: </span>{props.price ? `${props.price}₽` : 'бесплатно'}</p>
                 )}
@@ -37,37 +46,61 @@ const CommonServiceOrderDetailsPage = props => {
                     <p className="uk-text-bold" style={{ marginBottom: '.5em' }}>Опции</p>
                     <div className="food-options">
                         {props.options.map(o => (
-                            <p><span className="uk-text-muted">{o.name}: </span>{`${o.size} ${o.unit} (`}{o.price ? `${o.price}₽` : 'бесплатно'}{')'}</p>
+                            <p key={uuidv4()}>
+                                <span className="uk-text-muted">{o.name}: </span>
+                                {`${o.size} ${o.unit} (`}{o.price ? `${o.price}₽` : 'бесплатно'}{')'}
+                            </p>
                         ))}
                     </div>
-                    <p><span className="uk-text-muted">Цена услуги: </span>{props.portion.price ? `${props.portion.price}₽` : 'бесплатно'}</p>
-                    <p><span className="uk-text-muted">Итоговая цена: </span>
+                    <p>
+                        <span className="uk-text-muted">Цена услуги: </span>
+                        {props.portion.price ? `${props.portion.price}₽` : 'бесплатно'}
+                    </p>
+                    <p>
+                        <span className="uk-text-muted">Итоговая цена: </span>
                         {`${props.options.reduce((acc, o) => acc + o.price || 0, 0) + props.portion.price || 0}₽`}
                     </p>
                 </>
             )}
             <hr />
-            <p style={{ marginBottom: '.25em' }}>Выберите статус:</p>
-            <div>
-                <div className="uk-margin uk-child-width-auto uk-flex uk-flex-column">
-                    <label>
-                        <input
-                            type="radio"
-                            value={orderStatuses.COMPLETED}
-                            checked={currentStatus === orderStatuses.COMPLETED}
-                            onChange={handleOrderStatusChange}
-                        /> Обработано
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            value={orderStatuses.DENIED}
-                            checked={currentStatus === orderStatuses.DENIED}
-                            onChange={handleOrderStatusChange}
-                        /> Отклонено
-                    </label>
-                </div>
-            </div>
+
+            {!alreadyProcessed ? (
+                <>
+                    <p style={{ marginBottom: '.25em' }}>Выберите статус:</p>
+                    <div>
+                        <div className="uk-margin uk-child-width-auto uk-flex uk-flex-column">
+                            <label>
+                                <input
+                                    type="radio"
+                                    value={orderStatuses.COMPLETED}
+                                    checked={currentStatus === orderStatuses.COMPLETED}
+                                    onChange={handleOrderStatusChange}
+                                /> Обработано
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    value={orderStatuses.DENIED}
+                                    checked={currentStatus === orderStatuses.DENIED}
+                                    onChange={handleOrderStatusChange}
+                                /> Отклонено
+                            </label>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <p>
+                    Статус:{' '}
+                    {
+                        props.status === orderStatuses.COMPLETED
+                            ? <span style={{ color: 'green' }}>обработано</span>
+                            : props.status === orderStatuses.DENIED
+                                ? <span style={{ color: 'red' }}>отклонено</span>
+                                : ''
+                    }
+                </p>
+            )}
+
             <div className="uk-margin">
                 <label htmlFor="manager-comment">
                     <p style={{ marginBottom: '.25em' }}>
@@ -79,13 +112,21 @@ const CommonServiceOrderDetailsPage = props => {
                         className="uk-textarea"
                         id="manager-comment"
                         style={{minHeight: '100px'}}
-                        placeholder={currentStatus === orderStatuses.DENIED ? 'Укажите причину отказа' : 'Введите комментарий'}
+                        placeholder={
+                            alreadyProcessed
+                                ? 'пусто'
+                                : currentStatus === orderStatuses.DENIED
+                                    ? 'Укажите причину отказа'
+                                    : 'Введите комментарий'
+                        }
+                        defaultValue={alreadyProcessed ? props.managerComment || '' : ''}
+                        disabled={alreadyProcessed}
                     />
                 </div>
             </div>
-            <div>
+            {!alreadyProcessed && (
                 <Button type="button" label="Изменить статус"/>
-            </div>
+            )}
         </div>
     )
 };
@@ -97,19 +138,21 @@ const portionPropShape = {
 };
 
 CommonServiceOrderDetailsPage.propTypes = {
-    serviceType: PropTypes.oneOf(serviceTypes).isRequired,
+    serviceType: PropTypes.oneOf(Object.values(serviceTypes)).isRequired,
     room: PropTypes.string.isRequired,
     orderDate: PropTypes.string.isRequired,
     serveDate: PropTypes.string.isRequired,
     orderId: PropTypes.number.isRequired,
     serviceName: PropTypes.string.isRequired,
     customerComment: PropTypes.string,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.number,
     portion: PropTypes.shape(portionPropShape),
     options: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
         ...portionPropShape,
-    })).isRequired
+    })).isRequired,
+    status: PropTypes.oneOf(Object.values(orderStatuses)),
+    managerComment: PropTypes.string,
 };
 
 CommonServiceOrderDetailsPage.defaultProps = {

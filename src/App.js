@@ -12,6 +12,18 @@ import Options from "./components/service/NewFood/Options";
 import ServiceOrderListPage from "./components/service/order/ServiceOrderListPage";
 import ServiceOrderDetailsPage from "./components/service/order/ServiceOrderDetailsPage";
 import FoodOrderDetailsPage from "./components/service/order/FoodOrderDetailsPage";
+import * as orderStatuses from './components/service/order/statuses';
+
+const ProcessedServiceOrderDetailsPage = () =>
+	<ServiceOrderDetailsPage
+		status={orderStatuses.DENIED}
+		managerComment={'У вас уже убрано!'}
+	/>;
+
+const ProcessedFoodOrderDetailsPage = () =>
+	<FoodOrderDetailsPage
+		status={orderStatuses.COMPLETED}
+	/>;
 
 export default function App() {
 	return (
@@ -28,7 +40,9 @@ export default function App() {
 				<Route exact path="/service/new/food-options" component={Options}/>
 				<Route exact path="/service/order/list" component={ServiceOrderListPage}/>
 				<Route exact path="/service/order/details-service" component={ServiceOrderDetailsPage}/>
+				<Route exact path="/service/order/details-service/processed" component={ProcessedServiceOrderDetailsPage}/>
 				<Route exact path="/service/order/details-food" component={FoodOrderDetailsPage}/>
+				<Route exact path="/service/order/details-food/processed" component={ProcessedFoodOrderDetailsPage}/>
 			</BrowserRouter>
 		</div>
 	)

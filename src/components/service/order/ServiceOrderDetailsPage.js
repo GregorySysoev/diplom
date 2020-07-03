@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CommonServiceOrderDetailsPage from "./CommonServiceOrderDetailsPage";
 import * as serviceTypes from '../types';
+import * as orderStatuses from "./statuses";
 
-const ServiceOrderDetailsPage = () => {
+const ServiceOrderDetailsPage = props => {
     const data = {
         serviceType: serviceTypes.SERVICE,
         room: '159',
@@ -14,15 +16,14 @@ const ServiceOrderDetailsPage = () => {
         price: 0,
     };
     return <CommonServiceOrderDetailsPage
-        serviceType={data.serviceType}
-        room={data.room}
-        orderDate={data.orderDate}
-        serveDate={data.serveDate}
-        orderId={data.orderId}
-        serviceName={data.serviceName}
-        customerComment={data.customerComment}
-        price={data.price}
+        {...data}
+        {...props}
     />;
+};
+
+ServiceOrderDetailsPage.propTypes = {
+    status: PropTypes.oneOf(Object.values(orderStatuses)),
+    managerComment: PropTypes.string,
 };
 
 export default ServiceOrderDetailsPage;
