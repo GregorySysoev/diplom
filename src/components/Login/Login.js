@@ -7,7 +7,6 @@ export default class Login extends React.Component {
     render() {
         return (
             <div>
-                <Header></Header>
                 <div class="login">
                     <div id="login-words">Добро пожаловать</div>
                     <div><div>Логин: </div><input autoComplete="off" id="login" ></input></div>
