@@ -13,12 +13,10 @@ class NewFood extends Component {
 			carbohydrates: '',
 			protein: '',
 			fat: '',
-			size: '',
-			units: '',
-			price: '',
+			portions: [],
+			lastPortionId: 0,
 		}
 	}
-
 
 	handleChange = event => {
 		const target = event.target
@@ -28,6 +26,38 @@ class NewFood extends Component {
 		this.setState({
 			[name]: value,
 		})
+	}
+
+	handlePortionChange = (id, fieldName, fieldValue) => {
+		this.setState(prevState => {
+			const portionToChange = prevState.portions.filter(portion => portion.id === id)[0] || null;
+			if (portionToChange === null) {
+				return;
+			}
+			portionToChange[fieldName] = fieldValue;
+			return { portions: prevState.portions };
+		});
+	}
+
+	addPortion = () => {
+		this.setState(prevState => ({
+			portions: [
+				...prevState.portions,
+				{
+					id: prevState.lastPortionId + 1,
+					size: '',
+					unit: '',
+					price: '',
+				},
+			],
+			lastPortionId: prevState.lastPortionId + 1,
+		}));
+	}
+
+	removePortion = id => {
+		this.setState(prevState => ({
+			portions: prevState.portions.filter(portion => portion.id !== id),
+		}));
 	}
 
 	render() {
@@ -136,41 +166,63 @@ class NewFood extends Component {
 						</div>
 					</div>
 					<div>
-						<fieldset style={{ border: '1px dashed #ccc' }}>
-							<h5>Порция</h5>
-							<div className="uk-margin-bottom">
-								<label className="uk-form-label">Размер </label>
-								<div className="uk-form-controls">
-									<input type="number"
-										   className="uk-input"
-										   name="size"
-										   onChange={this.handleChange}
-										   value={this.state.size}/>
+						{this.state.portions.map(portion =>
+							<fieldset key={portion.id} style={{ border: '1px dashed #ccc' }}>
+								<div style={{ position: 'relative' }}>
+									<h5>Порция</h5>
+									<div style={{ position: 'absolute', top: '1px', right: '1px' }}>
+										<a uk-icon="trash"
+										   className="uk-icon-button uk-button-danger"
+										   title="Удалить"
+										   onClick={() => this.removePortion(portion.id)}/>
+									</div>
 								</div>
-							</div>
-							<div className="uk-margin-bottom">
-								<label className="uk-form-label">Единица измерения </label>
-								<div className="uk-form-controls">
-									<select className="uk-select" name="units" onChange={this.handleChange}
-											value={this.state.units}>
-										<option value="gr">Грамм</option>
-										<option value="kg">Килограмм</option>
-									</select>
+								<div className="uk-margin-bottom">
+									<label className="uk-form-label">Размер </label>
+									<div className="uk-form-controls">
+										<input type="number"
+											   className="uk-input"
+											   name="size"
+											   onChange={event => this.handlePortionChange(portion.id, event.target.name, +event.target.value)}
+											   value={portion.size}
+											   step={1}
+											   min={0}/>
+									</div>
 								</div>
-							</div>
-							<div className="uk-margin-bottom">
-								<label className="uk-form-label uk-margin-remove-top">Цена </label>
-								<div className="uk-form-controls">
-									<input type="number"
-										   className="uk-input"
-										   name="price"
-										   onChange={this.handleChange}
-										   value={this.state.price}/>
+								<div className="uk-margin-bottom">
+									<label className="uk-form-label">Единица измерения </label>
+									<div className="uk-form-controls">
+										<select
+											className="uk-select"
+											name="unit"
+											onChange={event => this.handlePortionChange(portion.id, event.target.name, event.target.value)}
+											value={portion.unit}
+										>
+											<option value="gr">Грамм</option>
+											<option value="kg">Килограмм</option>
+										</select>
+									</div>
 								</div>
-							</div>
-						</fieldset>
+								<div className="uk-margin-bottom">
+									<label className="uk-form-label uk-margin-remove-top">Цена </label>
+									<div className="uk-form-controls">
+										<input type="number"
+											   className="uk-input"
+											   name="price"
+											   onChange={event => this.handlePortionChange(portion.id, event.target.name, +event.target.value)}
+											   value={portion.price}
+											   step={1}
+											   min={0}/>
+									</div>
+								</div>
+							</fieldset>
+						)}
 						<div>
-							<Button label="Добавить ещё порцию"/>
+							<Button
+								type="button"
+								label={this.state.portions.length === 0 ? 'Добавить порцию' : 'Добавить ещё порцию'}
+								onClick={this.addPortion}
+							/>
 						</div>
 					</div>
 				</form>

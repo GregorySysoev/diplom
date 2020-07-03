@@ -22,6 +22,9 @@ class TimeRange extends Component {
 	handleChange = (id, fieldName, fieldValue) => {
 		this.setState(prevState => {
 			const rangeToChange = prevState.timeRanges.filter(range => range.id === id)[0] || null;
+			if (rangeToChange === null) {
+				return;
+			}
 			rangeToChange[fieldName] = fieldValue;
 			return { timeRanges: prevState.timeRanges };
 		});
@@ -58,17 +61,19 @@ class TimeRange extends Component {
 				</div>
 				<form className="uk-form-horizontal uk-child-width-1-1 uk-child-width-1-2@s">
 					{this.state.timeRanges.map(range =>
-						<div className="uk-inline" key={range.id}>
+						<div key={range.id}>
 							<fieldset style={{ border: '1px dashed #ccc' }}>
-								<h5>Диапазон</h5>
-								{this.state.timeRanges.length > 1 && (
-									<div className="uk-position-top-right uk-overlay" style={{ padding: '5px' }}>
-										<a uk-icon="trash"
-										   className="uk-icon-button uk-button-danger"
-										   title="Удалить"
-										   onClick={() => this.removeRange(range.id)}/>
-									</div>
-								)}
+								<div style={{ position: 'relative' }}>
+									<h5>Диапазон</h5>
+									{this.state.timeRanges.length > 1 && (
+										<div style={{ position: 'absolute', top: '1px', right: '1px' }}>
+											<a uk-icon="trash"
+											   className="uk-icon-button uk-button-danger"
+											   title="Удалить"
+											   onClick={() => this.removeRange(range.id)}/>
+										</div>
+									)}
+								</div>
 								<div data-uk-grid="">
 									<div className="uk-margin">
 										<label className="uk-form-label" htmlFor="begin">С</label>
