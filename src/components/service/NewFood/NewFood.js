@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import Button from "../../Button"
+import IngredientSelector from "./IngredientSelector";
 
 class NewFood extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			ingredients: '',
 			isAlcoholic: false,
 			isSpicy: false,
 			calorie: '',
@@ -74,12 +74,7 @@ class NewFood extends Component {
 						<div className="uk-margin-bottom">
 							<label className="uk-form-label">Ингредиенты</label>
 							<div className="uk-form-controls">
-								<select className="uk-select" name="ingredients" onChange={this.handleChange}
-										value={this.state.ingredients}>
-									<option>Option 01</option>
-									<option>Option 02</option>
-									<option>Option 03</option>
-								</select>
+								<IngredientSelector/>
 							</div>
 						</div>
 						<div className="uk-margin-bottom">
