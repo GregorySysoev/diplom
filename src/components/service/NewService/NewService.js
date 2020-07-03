@@ -110,8 +110,9 @@ export default class NewService extends React.Component {
 								<select className="uk-select"
 										id="service-category"
 										name="category"
-										onChange={this.handleChange}>
-									<option disabled selected hidden value="">Выберите категорию</option>
+										onChange={this.handleChange}
+										defaultValue="">
+									<option disabled hidden value="">Выберите категорию</option>
 									<option value="Деликатес">Деликатес</option>
 									<option value="Вино">Вино</option>
 								</select>
