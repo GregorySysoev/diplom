@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Button from "../../Button"
-import IngredientSelector from "./IngredientSelector";
+import PortionUnitSelector from "./PortionUnitSelector";
 
 class Options extends Component {
     constructor(props) {
@@ -18,7 +18,6 @@ class Options extends Component {
                     id: 1,
                     name: '',
                     size: '',
-                    unit: '',
                     price: '',
                 },
             ],
@@ -55,7 +54,6 @@ class Options extends Component {
                     id: prevState.lastPortionId + 1,
                     name: '',
                     size: '',
-                    unit: '',
                     price: '',
                 },
             ],
@@ -119,15 +117,7 @@ class Options extends Component {
                                 <div className="uk-margin-bottom">
                                     <label className="uk-form-label">Единица измерения </label>
                                     <div className="uk-form-controls">
-                                        <select
-                                            className="uk-select"
-                                            name="unit"
-                                            onChange={event => this.handlePortionChange(portion.id, event.target.name, event.target.value)}
-                                            value={portion.unit}
-                                        >
-                                            <option value="gr">Грамм</option>
-                                            <option value="kg">Килограмм</option>
-                                        </select>
+                                        <PortionUnitSelector/>
                                     </div>
                                 </div>
                                 <div className="uk-margin-bottom">
