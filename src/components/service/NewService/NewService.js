@@ -57,7 +57,7 @@ export default class NewService extends React.Component {
 		return (
 			<div className="uk-container uk-margin-top uk-margin-bottom">
 				<div className="uk-margin-top uk-margin-bottom">
-					<a className="uk-link-muted" href="#">Назад, к доступным действиям</a>
+					<a className="uk-link-muted" href="/service/list">Назад</a>
 				</div>
 				<form className="uk-form-horizontal" data-uk-grid>
 					<div className="service-type uk-width-1-5@m">
@@ -176,8 +176,9 @@ export default class NewService extends React.Component {
 						/>
 					</div>
 					<div>
-						<button className="uk-button uk-button-primary" type="submit">Далее
-						</button>
+						<a className="uk-button uk-button-primary" href="/service/new/availability">
+							Далее
+						</a>
 					</div>
 				</form>
 			</div>

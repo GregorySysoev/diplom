@@ -13,6 +13,7 @@ import ServiceOrderListPage from "./components/service/order/ServiceOrderListPag
 import ServiceOrderDetailsPage from "./components/service/order/ServiceOrderDetailsPage";
 import FoodOrderDetailsPage from "./components/service/order/FoodOrderDetailsPage";
 import * as orderStatuses from './components/service/order/statuses';
+import NullPage from "./components/NullPage";
 
 const ProcessedServiceOrderDetailsPage = () =>
 	<ServiceOrderDetailsPage
@@ -43,6 +44,7 @@ export default function App() {
 				<Route exact path="/service/order/details-service/processed" component={ProcessedServiceOrderDetailsPage}/>
 				<Route exact path="/service/order/details-food" component={FoodOrderDetailsPage}/>
 				<Route exact path="/service/order/details-food/processed" component={ProcessedFoodOrderDetailsPage}/>
+				<Route path="/null" component={NullPage}/>
 			</BrowserRouter>
 		</div>
 	)

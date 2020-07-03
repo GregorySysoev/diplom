@@ -214,7 +214,9 @@ class NewFood extends Component {
 					</div>
 				</form>
 				<div>
-					<Button label="Далее"/>
+					<a className="uk-button uk-button-primary" href="/service/new/food-options">
+						Далее
+					</a>
 				</div>
 			</div>
 		)

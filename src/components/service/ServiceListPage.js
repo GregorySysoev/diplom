@@ -42,9 +42,9 @@ export default function ServiceListPage() {
         ) : (
             ''
         )}
-        <button className="uk-button uk-button-primary" type="button">
+        <a className="uk-button uk-button-primary" href="/service/new">
             Добавить услугу
-        </button>{' '}
+        </a>{' '}
         <button className="uk-button uk-button-primary" type="button">
             Добавить категорию
         </button>

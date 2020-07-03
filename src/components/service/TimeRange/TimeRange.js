@@ -54,7 +54,7 @@ class TimeRange extends Component {
 		return (
 			<div className="uk-container uk-margin-top uk-margin-bottom">
 				<div className="uk-margin-top uk-margin-bottom">
-					<a className="uk-link-muted" href="#">Назад, к доступным действиям</a>
+					<a className="uk-link-muted" href="/service/new">Назад</a>
 				</div>
 				<div>
 					<p className="uk-text-bold">Укажите, в какое время услуга будет доступна</p>
@@ -140,7 +140,9 @@ class TimeRange extends Component {
 					</div>
 				</form>
 				<div className="uk-margin-large-top">
-					<Button label="Далее"/>
+					<a className="uk-button uk-button-primary" href="/null">
+						Далее
+					</a>
 				</div>
 			</div>
 		)

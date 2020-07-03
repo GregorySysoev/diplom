@@ -144,7 +144,9 @@ class Options extends Component {
                     </div>
                 </form>
                 <div>
-                    <Button label="Далее"/>
+                    <a className="uk-button uk-button-primary" href="/service/list">
+                        Далее
+                    </a>
                 </div>
             </div>
         )
