@@ -6,6 +6,7 @@ import ServiceListPage from "./components/service/ServiceListPage";
 import HotelEntry from "./components/HotelEntry/HotelEntry"
 import Login from "./components/Login/Login"
 import AvailableActions from './components/AvailableActions/AvailableActions';
+import Bed from "./components/Bed/Bed"
 import NewFood from "./components/service/NewFood/NewFood";
 import TimeRange from "./components/service/TimeRange/TimeRange";
 import Options from "./components/service/NewFood/Options";
@@ -34,6 +35,8 @@ export default function App() {
 				<Route exact path='/login' component={Login}/>
 				<Route exact path='/hotel' component={HotelEntry}/>
 				<Route exact path='/actions' component={AvailableActions}/>
+				<Route path='/bed' component={Bed}/>
+
 				<Route exact path="/service/list" component={ServiceListPage}/>
 				<Route exact path="/service/new" component={NewService}/>
 				<Route exact path="/service/new/availability" component={TimeRange}/>

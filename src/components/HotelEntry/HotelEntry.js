@@ -1,6 +1,18 @@
 import React from "react"
 import './hotelEntry.sass'
 import Header from "../Header"
+import PhotoUploader from "./PhotoUploader";
+import Dropzone from 'react-dropzone-uploader';
+import Select from 'react-select'
+import CreatableSelect from 'react-select/creatable';
+
+const facilities = [
+	{ value: 'chocolate', label: 'Chocolate' },
+	{ value: 'strawberry', label: 'Strawberry' },
+	{ value: 'vanilla', label: 'Vanilla' }
+]
+
+
 
 export default class HotelEntry extends React.Component {
 	constructor(props) {
@@ -10,13 +22,54 @@ export default class HotelEntry extends React.Component {
 			name: '',
 			description: '',
 			category: '',
-			price: '',	
+			price: '',
 			hoursOfExecution: '',
 			minutesOfExecution: '',
 			hoursOfWaiting: '',
 			minutesOfWaiting: '',
-			photo: '',
+			photoIds: [],
+			mainPhotoId: null,
+			lastPhotoId: 0,
 		}
+	}
+
+	handleChange1 = (newValue, actionMeta) => {
+		console.group('Value Changed');
+		console.log(newValue);
+		console.log(`action: ${actionMeta.action}`);
+		console.groupEnd();
+	};
+
+	handleChange = event => {
+		console.log(event.target.value)
+		this.setState({ [event.target.name]: event.target.value })
+	}
+
+	addPhoto = id => {
+		this.setState(prevState => {
+			const newState = {
+				photoIds: [...prevState.photoIds, id],
+				lastPhotoId: id,
+			};
+			if (prevState.photoIds.length === 0) {
+				newState.mainPhotoId = id;
+			}
+			return newState;
+		});
+	}
+
+	removePhoto = id => {
+		this.setState(prevState => {
+			const newState = { photoIds: prevState.photoIds.filter(photoId => photoId !== id) };
+			if (prevState.mainPhotoId === id) {
+				newState.mainPhotoId = prevState.photoIds[0] || null;
+			}
+			return newState;
+		});
+	}
+
+	setMainPhoto = id => {
+		this.setState({ mainPhotoId: id });
 	}
 
 	handleChange = event => {
@@ -31,28 +84,11 @@ export default class HotelEntry extends React.Component {
 					<div className="uk-margin-top uk-margin-bottom">
 						<a className="uk-link-muted" href="#">Назад, к доступным действиям</a>
 					</div>
+					<div>
+						<p className="uk-text-bold">Укажите основную информацию о гостинице</p>
+					</div>
 					<form className="uk-form-horizontal" data-uk-grid>
-						<div className="service-type uk-width-1-5@m">
-							<span className="uk-padding-small">Выберите тип услуги</span>
-							<div className="uk-margin uk-child-width-auto uk-flex uk-flex-column "
-								onChange={this.handleChange}>
-								<label className="uk-padding-small">
-									<input className="uk-radio"
-										type="radio"
-										name="type"
-										defaultChecked
-										value="food" />
-									<span> Блюдо или напиток </span>
-								</label>
-								<label className="uk-padding-small">
-									<input className="uk-radio"
-										type="radio"
-										name="type"
-										value="service" />
-									<span> Сервис </span>
-								</label>
-							</div>
-						</div>
+
 						<div className="uk-width-2-5@m">
 							<div className="uk-margin">
 								<label className="uk-form-label" htmlFor="service-name">Название: </label>
@@ -61,8 +97,24 @@ export default class HotelEntry extends React.Component {
 										id="service-name"
 										type="text"
 										name="name"
+										autoComplete="off"
 										onChange={this.handleChange}
 										placeholder="" />
+								</div>
+							</div>
+							<div className="uk-margin">
+
+								<label className="uk-form-label" htmlFor="begin">Кол-во звёзд</label>
+								<div id="begin" className="uk-flex">
+									<div className="uk-form-controls uk-flex timeRange-row">
+										<input className="uk-input"
+											name="beginHour"
+											type="number"
+											step={1}
+											min={0}
+											max={5} />
+										<span className="timeRange-label">звёзд</span>
+									</div>
 								</div>
 							</div>
 							<div className="uk-margin">
@@ -77,70 +129,102 @@ export default class HotelEntry extends React.Component {
 								</div>
 							</div>
 							<div className="uk-margin">
-								<label className="uk-form-label" htmlFor="service-category">Категория: </label>
+								<label className="uk-form-label" htmlFor="service-name">Удобства: </label>
+								<div className="uk-form-controls">
+									<Select
+										isMulti
+										options={facilities}
+									/>
+								</div>
+							</div>
+							<div className="uk-margin">
+								<label className="uk-form-label" htmlFor="service-name">Важные места: </label>
+								<div className="uk-form-controls">
+									<CreatableSelect
+										isMulti
+										onChange={this.handleChange1}
+									/>
+								</div>
+							</div>
+							<div className="uk-margin">
+								<label className="uk-form-label" htmlFor="service-category">Регион: </label>
 								<div className="uk-form-controls">
 									<select className="uk-select"
 										id="service-category"
 										name="category"
 										onChange={this.handleChange}>
-										<option disabled selected hidden value="">Выберите категорию</option>
-										<option value="Деликатес">Деликатес</option>
-										<option value="Вино">Вино</option>
+										<option disabled selected hidden value="">выберите регион</option>
+										<option value="Деликатес">Дальневосточный</option>
+										<option value="Вино">Центральный</option>
 									</select>
 								</div>
 							</div>
 							<div className="uk-margin">
-								<label className="uk-form-label" htmlFor="service-price">Стоимость: </label>
+								<label className="uk-form-label" htmlFor="service-category">Город: </label>
+								<div className="uk-form-controls">
+									<select className="uk-select"
+										id="service-category"
+										name="category"
+										onChange={this.handleChange}>
+										<option disabled selected hidden value="">выберите город</option>
+										<option value="Деликатес">Владивосток</option>
+										<option value="Вино">Находка</option>
+										<option value="Вино">Уссурийск</option>
+									</select>
+								</div>
+							</div>
+							<div className="uk-margin">
+								<label className="uk-form-label" htmlFor="service-category">Район: </label>
+								<div className="uk-form-controls">
+									<select className="uk-select"
+										id="service-category"
+										name="category"
+										onChange={this.handleChange}>
+										<option disabled selected hidden value="">выберите район</option>
+										<option value="Деликатес">Чуркин</option>
+										<option value="Вино">Эгершельд</option>
+									</select>
+								</div>
+							</div>
+
+							<div className="uk-margin">
+								<label className="uk-form-label" htmlFor="service-name">Телефон: </label>
 								<div className="uk-form-controls">
 									<input className="uk-input"
-										id="service-price"
-										type="number"
-										name="price"
+										id="service-name"
+										type="text"
+										name="name"
+										autoComplete="off"
 										onChange={this.handleChange}
 										placeholder="" />
 								</div>
 							</div>
 							<div className="uk-margin">
-								<label className="uk-form-label" htmlFor="service-hoursOfExecution">Время вып.: </label>
-								<div className="uk-form-controls uk-flex">
-									<input className="uk-input uk-margin-small-right"
-										id="service-hoursOfExecution"
-										type="number"
-										name="hoursOfExecution"
-										onChange={this.handleChange} />
-									<span className="uk-form-label uk-margin-small-right">часов</span>
-									<input className="uk-input uk-margin-small-right"
-										type="number"
-										name="minutesOfExecution"
-										onChange={this.handleChange} />
-									<span className="uk-form-label">минут</span>
+								<label className="uk-form-label" htmlFor="service-name">Email: </label>
+								<div className="uk-form-controls">
+									<input className="uk-input"
+										id="service-name"
+										type="text"
+										name="name"
+										autoComplete="off"
+										onChange={this.handleChange}
+										placeholder="" />
 								</div>
 							</div>
-							<div className="uk-margin">
-								<label className="uk-form-label" htmlFor="service-hoursOfWaiting">Время ожид.: </label>
-								<div className="uk-form-controls uk-flex">
-									<input className="uk-input uk-margin-small-right"
-										id="service-hoursOfWaiting"
-										type="number"
-										name="hoursOfWaiting"
-										onChange={this.handleChange} />
-									<span className="uk-form-label uk-margin-small-right">часов</span>
-									<input className="uk-input uk-margin-small-right"
-										type="number"
-										name="minutesOfWaiting"
-										onChange={this.handleChange} />
-									<span className="uk-form-label">минут</span>
-								</div>
+							<div>
+								<a href="/bed" className="uk-button uk-button-primary" type="submit">Далее</a>
 							</div>
 						</div>
+
 						<div className="uk-width-2-5@m">
-							<div className="service-photoChooser">
-								<button className="uk-button uk-button-primary">Загрузить фото</button>
-							</div>
-						</div>
-						<div>
-							<button className="uk-button uk-button-primary" type="submit">Далее
-						</button>
+							<PhotoUploader
+								setMain={this.setMainPhoto}
+								addPhoto={this.addPhoto}
+								removePhoto={this.removePhoto}
+								photoIds={this.state.photoIds}
+								mainPhotoId={this.state.mainPhotoId}
+								lastPhotoId={this.state.lastPhotoId}
+							/>
 						</div>
 					</form>
 				</div>
