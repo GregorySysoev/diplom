@@ -12,8 +12,7 @@ const facilities = [
 const bedTypes = [
     { value: 'chocolate', label: 'Одноместная взрослая' },
     { value: 'strawberry', label: 'Одноместная детская' },
-    { value: 'vanilla', label: 'Двухместная взрослая luxe' },
-    { value: 'vanilla1', label: 'Двухярустная детская' }
+    { value: 'vanilla', label: 'Двухместная взрослая' },
 ];
 
 export default class Bed extends Component {
