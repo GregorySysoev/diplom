@@ -15,6 +15,9 @@ import ServiceOrderDetailsPage from "./components/service/order/ServiceOrderDeta
 import FoodOrderDetailsPage from "./components/service/order/FoodOrderDetailsPage";
 import * as orderStatuses from './components/service/order/statuses';
 import NullPage from "./components/NullPage";
+import Rule from "./components/Rule/Rule"
+import TypeOfNumber from "./components/TypeOfNumber/TypeOfNumber"
+import Discount from "./components/Discount/Discount"
 
 const ProcessedServiceOrderDetailsPage = () =>
 	<ServiceOrderDetailsPage
@@ -35,7 +38,10 @@ export default function App() {
 				<Route exact path='/login' component={Login}/>
 				<Route exact path='/hotel' component={HotelEntry}/>
 				<Route exact path='/actions' component={AvailableActions}/>
-				<Route path='/bed' component={Bed}/>
+				<Route exact path='/bed' component={Bed}/>
+				<Route exact path='/number' component={TypeOfNumber}/>
+				<Route exact path='/discount' component={Discount}/>
+				<Route exact path='/rule' component={Rule}/>
 
 				<Route exact path="/service/list" component={ServiceListPage}/>
 				<Route exact path="/service/new" component={NewService}/>

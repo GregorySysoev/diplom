@@ -103,18 +103,20 @@ export default class HotelEntry extends React.Component {
 								</div>
 							</div>
 							<div className="uk-margin">
-
-								<label className="uk-form-label" htmlFor="begin">Кол-во звёзд</label>
-								<div id="begin" className="uk-flex">
-									<div className="uk-form-controls uk-flex timeRange-row">
-										<input className="uk-input"
-											name="beginHour"
-											type="number"
-											step={1}
-											min={0}
-											max={5} />
-										<span className="timeRange-label">звёзд</span>
-									</div>
+								<label className="uk-form-label" htmlFor="service-category">Кол-во звёзд: </label>
+								<div className="uk-form-controls">
+									<select className="uk-select"
+										id="service-category"
+										name="category"
+										onChange={this.handleChange}>
+										<option disabled selected hidden value="">укажите кол-во звёзд</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
 								</div>
 							</div>
 							<div className="uk-margin">
