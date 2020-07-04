@@ -66,7 +66,7 @@ export default class Bed extends Component {
 
     render() {
         return (
-            <div><Header />
+            <div>
                 <div className="uk-container uk-margin-top uk-margin-bottom">
                     <div className="uk-margin-top uk-margin-bottom">
                         <a className="uk-link-muted" href="/service/new">Назад, к указанию типов спальных мест</a>
