@@ -19,6 +19,7 @@ import Rule from "./components/Rule/Rule"
 import TypeOfNumber from "./components/TypeOfNumber/TypeOfNumber"
 import Discount from "./components/Discount/Discount"
 import FinalWindow from "./components/FinalWindow/FinalWindow"
+import Orders from "./components/Orders/Orders"
 
 const ProcessedServiceOrderDetailsPage = () =>
 	<ServiceOrderDetailsPage
@@ -44,6 +45,8 @@ export default function App() {
 				<Route exact path='/discount' component={Discount}/>
 				<Route exact path='/rule' component={Rule}/>
 				<Route exact path='/final' component={FinalWindow}/>
+				<Route exact path='/orders' component={Orders}/>
+				<Route exact path='/client_registration' component={FinalWindow}/>
 
 				<Route exact path="/service/list" component={ServiceListPage}/>
 				<Route exact path="/service/new" component={NewService}/>
