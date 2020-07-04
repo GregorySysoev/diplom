@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import * as serviceTypes from '../types';
 import * as orderStatuses from './statuses';
@@ -14,7 +15,10 @@ const headCells = [
     { id: 'name', label: 'Название' },
     { id: 'room', label: 'Комната' },
     { id: 'serviceType', label: 'Тип услуги' },
-    { id: 'date', label: 'Дата создания заказа' },
+];
+
+const headCellsWithSort = [
+    { id: 'date', label: 'Дата создания заказа', sortDirection: 'asc' },
 ];
 
 function createData(name, room, serviceType, date) {
@@ -104,9 +108,21 @@ function ServiceOrderListPage() {
                         <Table className={classes.table}>
                             <TableHead>
                                 <TableRow>
-                                    {headCells.map((headCell) => (
+                                    {headCells.map(headCell => (
                                         <TableCell key={headCell.id}>
                                             {headCell.label}
+                                        </TableCell>
+                                    ))}
+
+                                    {headCellsWithSort.map(headCell => (
+                                        <TableCell key={headCell.id}>
+                                            <TableSortLabel
+                                                active={true}
+                                                direction={headCell.sortDirection}
+                                                onClick={() => {}}
+                                            >
+                                                {headCell.label}
+                                            </TableSortLabel>
                                         </TableCell>
                                     ))}
                                 </TableRow>
