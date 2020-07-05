@@ -7,7 +7,7 @@ export default class AvailableActions extends React.Component {
         return (
             <div>
                 <div id="available-actions">
-                    <div class="title">Доступные действия</div>
+                    <div className="title">Доступные действия</div>
                     <div>
                         <ul id="available-actions-list">
                             <li><a href="/hotel">Отредактировать информацию о гостинице</a></li>
