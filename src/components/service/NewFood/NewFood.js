@@ -98,7 +98,7 @@ class NewFood extends Component {
 							</div>
 						</div>
 						<div className="uk-margin-bottom">
-							<label className="uk-form-label">Калорийность </label>
+							<label className="uk-form-label">Калорийность (ккал, на 100 гр продукта)</label>
 							<div className="uk-form-controls">
 								<input type="number"
 									   className="uk-input"
@@ -107,6 +107,8 @@ class NewFood extends Component {
 									   value={this.state.calorie}/>
 							</div>
 						</div>
+						<br />
+						<br />
 						<div className="uk-margin-bottom">
 							<div className="uk-margin uk-grid-large uk-child-width-auto uk-grid">
 								<div className="uk-margin-bottom">
@@ -191,7 +193,7 @@ class NewFood extends Component {
 									</div>
 								</div>
 								<div className="uk-margin-bottom">
-									<label className="uk-form-label uk-margin-remove-top">Цена </label>
+									<label className="uk-form-label uk-margin-remove-top">Цена (₽) </label>
 									<div className="uk-form-controls">
 										<input type="number"
 											   className="uk-input"

@@ -122,7 +122,7 @@ export default class NewService extends React.Component {
 						</div>
 						{this.state.type !== 'food' && (
 							<div className="uk-margin">
-								<label className="uk-form-label" htmlFor="service-price">Стоимость: </label>
+								<label className="uk-form-label" htmlFor="service-price">Цена (₽): </label>
 								<div className="uk-form-controls">
 									<input className="uk-input"
 										   id="service-price"
