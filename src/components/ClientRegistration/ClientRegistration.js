@@ -8,17 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import CreatableSelect from 'react-select/creatable';
 
 const ClientRegistratioin = props => {
-    // props = [
-    //     number = '#123',
-    //     fio = 'Сысоев Григорий Михайлович',
-    //     dates = '25.08.2020 - 27.09.2020',
-    //     persons = '2 взр. 0 дет.',
-    //     type = 'Стандарт',
-    //     phone = '88005553535',
-    //     mail = 'user@mail.ru',
-    //     pay = '33000/33000',
-    // ]
-
+   
     const alreadyProcessed = props.status && props.status !== orderStatuses.PENDING;
 
     const updateNumber = () => {
@@ -36,14 +26,14 @@ const ClientRegistratioin = props => {
             </div>
             <p className="uk-text-bold" style={{ marginBottom: '.5em' }}>Информация о заказе</p>
             <div className="order-details">
-                <p><span className="uk-text-muted">№ заказа: </span>#123</p>
-                <p><span className="uk-text-muted">ФИО: </span>Сысоев Григорий Михайлович</p>
+                <p><span className="uk-text-muted">№ заказа: </span>#1</p>
+                <p><span className="uk-text-muted">ФИО: </span>Константин Голуб</p>
                 <p><span className="uk-text-muted">Даты проживания: </span>25.08.2020 - 27.09.2020</p>
-                <p><span className="uk-text-muted">Кол-во персон: </span>2 взр. 0 дет.</p>
-                <p><span className="uk-text-muted">Тип номера: </span>Стандарт</p>
-                <p><span className="uk-text-muted">Телефон: </span>88005553535</p>
-                <p><span className="uk-text-muted">Почта: </span>user@mail.ru</p>
-                <p><span className="uk-text-muted">Оплачено: </span>33000/33000</p>
+                <p><span className="uk-text-muted">Кол-во персон: </span>2 взрослых 1 ребёнок</p>
+                <p><span className="uk-text-muted">Тип номера: </span>Стандартный двухместный номер х2</p>
+                <p><span className="uk-text-muted">Телефон: </span>+7 953 293 25-88</p>
+                <p><span className="uk-text-muted">Почта: </span>golub@hotel.ru</p>
+                <p><span className="uk-text-muted">Оплачено: </span>6480/6480</p>
                 {props.serviceType === serviceTypes.FOOD && (
                     <p>
                         <span className="uk-text-muted">Размер порции: </span>
