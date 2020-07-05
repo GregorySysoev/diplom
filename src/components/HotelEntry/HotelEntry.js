@@ -5,10 +5,18 @@ import Select from 'react-select'
 import CreatableSelect from 'react-select/creatable';
 
 const facilities = [
-	{ value: 'chocolate', label: 'Chocolate' },
-	{ value: 'strawberry', label: 'Strawberry' },
-	{ value: 'vanilla', label: 'Vanilla' }
-]
+	{ id: 1, name: 'Бесплатный Wi-Fi' },
+	{ id: 2, name: 'Номера для некурящих' },
+	{ id: 3, name: 'Терраса' },
+	{ id: 4, name: 'Отопление' },
+	{ id: 5, name: 'Лифт' },
+	{ id: 6, name: 'Кондиционер' },
+	{ id: 7, name: 'Парковка' },
+	{ id: 8, name: 'Трансфер от/до аэропорта' },
+	{ id: 9, name: 'Семейные номера' },
+	{ id: 10, name: 'Кофеварка/чайник во всех номерах' },
+	{ id: 11, name: 'Круглосуточная стойка регистрации' },
+];
 
 const regions = [
 	{ id: 1, name: "Республика Адыгея" },
@@ -100,47 +108,54 @@ const regions = [
 ];
 
 const cities = [
-	{ id: 1, name: "Абакан" },
-	{ id: 2, name: "Азов" },
-	{ id: 3, name: "Александров" },
-	{ id: 4, name: "Алексин" },
-	{ id: 5, name: "Альметьевск" },
-	{ id: 6, name: "Анапа" },
-	{ id: 7, name: "Ангарск" },
-	{ id: 8, name: "Анжеро-Судженск" },
-	{ id: 9, name: "Апатиты" },
-	{ id: 10, name: "Арзамас" },
-	{ id: 11, name: "Армавир" },
-	{ id: 12, name: "Арсеньев" },
-	{ id: 13, name: "Артем" },
-	{ id: 14, name: "Архангельск" },
-	{ id: 15, name: "Асбест" },
-	{ id: 16, name: "Астрахань" },
-	{ id: 17, name: "Ачинск" },
-	{ id: 18, name: "Балаково" },
-	{ id: 19, name: "Балахна" },
-	{ id: 20, name: "Великие Луки" },
-	{ id: 21, name: "Великий Новгород" },
-	{ id: 22, name: "Верхняя Пышма" },
-	{ id: 23, name: "Видное" },
-	{ id: 24, name: "Владивосток" },
-	{ id: 25, name: "Владикавказ" },
-	{ id: 26, name: "Владимир" },
-	{ id: 27, name: "Волгоград" },
-	{ id: 28, name: "Волгодонск" },
-	{ id: 29, name: "Волжск" },
-	{ id: 30, name: "Волжский" },
-	{ id: 31, name: "Вологда" },
-	{ id: 32, name: "Вольск" },
-	{ id: 33, name: "Воркута" },
-	{ id: 34, name: "Воронеж" },
-	{ id: 35, name: "Воскресенск" },
-	{ id: 36, name: "Воткинск" },
-	{ id: 37, name: "Всеволожск" },
-	{ id: 38, name: "Выборг" },
-	{ id: 39, name: "Выкса" },
-	{ id: 40, name: "Вязьма" },
+	{ id: 1, name: "Абакан", regionId: 19 },
+	{ id: 2, name: "Азов", regionId: 61 },
+	{ id: 3, name: "Александров", regionId: 33 },
+	{ id: 4, name: "Алексин", regionId: 71 },
+	{ id: 5, name: "Альметьевск", regionId: 16 },
+	{ id: 6, name: "Анапа", regionId: 23 },
+	{ id: 7, name: "Ангарск", regionId: 38 },
+	{ id: 8, name: "Анжеро-Судженск", regionId: 42 },
+	{ id: 9, name: "Апатиты", regionId: 51 },
+	{ id: 10, name: "Арзамас", regionId: 52 },
+	{ id: 11, name: "Армавир", regionId: 23 },
+	{ id: 12, name: "Арсеньев", regionId: 25 },
+	{ id: 13, name: "Артем", regionId: 25 },
+	{ id: 14, name: "Архангельск", regionId: 29 },
+	{ id: 15, name: "Асбест", regionId: 66 },
+	{ id: 16, name: "Астрахань", regionId: 30 },
+	{ id: 17, name: "Ачинск", regionId: 55 },
+	{ id: 18, name: "Балаково", regionId: 64 },
+	{ id: 19, name: "Балахна", regionId: 52 },
+	{ id: 20, name: "Великие Луки", regionId: 60 },
+	{ id: 21, name: "Великий Новгород", regionId: 53 },
+	{ id: 22, name: "Верхняя Пышма", regionId: 66 },
+	{ id: 23, name: "Видное", regionId: 50 },
+	{ id: 24, name: "Владивосток", regionId: 25 },
+	{ id: 25, name: "Владикавказ", regionId: 15 },
+	{ id: 26, name: "Владимир", regionId: 33 },
+	{ id: 27, name: "Волгоград", regionId: 34 },
+	{ id: 28, name: "Волгодонск", regionId: 61 },
+	{ id: 29, name: "Волжск", regionId: 12 },
+	{ id: 30, name: "Волжский", regionId: 34 },
+	{ id: 31, name: "Вологда", regionId: 35 },
+	{ id: 32, name: "Вольск", regionId: 64 },
+	{ id: 33, name: "Воркута", regionId: 11 },
+	{ id: 34, name: "Воронеж", regionId: 36 },
+	{ id: 35, name: "Воскресенск", regionId: 50 },
+	{ id: 36, name: "Воткинск", regionId: 18 },
+	{ id: 37, name: "Всеволожск", regionId: 47 },
+	{ id: 38, name: "Выборг", regionId: 47 },
+	{ id: 39, name: "Выкса", regionId: 52 },
+	{ id: 40, name: "Вязьма", regionId: 67 },
+];
 
+const districts = [
+	{ id: 1, name: 'Ленинский', cityId: 24 },
+	{ id: 2, name: 'Первомайский', cityId: 24 },
+	{ id: 3, name: 'Первореченский', cityId: 24 },
+	{ id: 4, name: 'Советский', cityId: 24 },
+	{ id: 5, name: 'Фрунзенский', cityId: 24 },
 ];
 
 export default class HotelEntry extends React.Component {
@@ -150,7 +165,9 @@ export default class HotelEntry extends React.Component {
 			type: 'food',
 			name: '',
 			description: '',
-			category: '',
+			regionId: '',
+			cityId: '',
+			districtId: '',
 			price: '',
 			hoursOfExecution: '',
 			minutesOfExecution: '',
@@ -239,7 +256,6 @@ export default class HotelEntry extends React.Component {
 										name="category"
 										onChange={this.handleChange}>
 										<option disabled selected hidden value="">Укажите кол-во звёзд</option>
-										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
@@ -265,7 +281,10 @@ export default class HotelEntry extends React.Component {
 									<Select
 										isMulti
 										placeholder="Введите удобства"
-										options={facilities}
+										options={facilities.map(f => ({
+											value: f.id,
+											label: f.name,
+										}))}
 									/>
 								</div>
 							</div>
@@ -286,12 +305,12 @@ export default class HotelEntry extends React.Component {
 								<div className="uk-form-controls">
 									<select className="uk-select"
 										id="service-category"
-										name="category"
+										name="regionId"
 										onChange={this.handleChange}
 									>
 										<option disabled selected hidden value="">Выберите регион</option>
 										{regions.map(r => (
-											<option value={r.id}>{r.name}</option>
+											<option id={r.id} value={r.id}>{r.name}</option>
 										))}
 									</select>
 								</div>
@@ -301,11 +320,15 @@ export default class HotelEntry extends React.Component {
 								<div className="uk-form-controls">
 									<select className="uk-select"
 										id="service-category"
-										name="category"
-										onChange={this.handleChange}>
-										<option disabled selected hidden value="">Выберите город</option>
-										{cities.map(c => (
-											<option value={c.id}>{c.name}</option>
+										name="cityId"
+										disabled={!this.state.regionId}
+										onChange={this.handleChange}
+									>
+										<option disabled selected hidden value="">
+											{this.state.regionId ? 'Выберите город' : null}
+										</option>
+										{this.state.regionId && cities.filter(c => c.regionId == this.state.regionId).map(c => (
+											<option id={c.id} value={c.id}>{c.name}</option>
 										))}
 									</select>
 								</div>
@@ -315,11 +338,16 @@ export default class HotelEntry extends React.Component {
 								<div className="uk-form-controls">
 									<select className="uk-select"
 										id="service-category"
-										name="category"
-										onChange={this.handleChange}>
-										<option disabled selected hidden value="">Выберите район</option>
-										<option value="Деликатес">Чуркин</option>
-										<option value="Вино">Эгершельд</option>
+										name="districtId"
+										disabled={!this.state.cityId}
+										onChange={this.handleChange}
+									>
+										<option disabled selected hidden value="">
+											{this.state.cityId ? 'Выберите район' : null}
+										</option>
+										{this.state.cityId && districts.filter(d => d.cityId == this.state.cityId).map(d => (
+											<option id={d.id} value={d.id}>{d.name}</option>
+										))}
 									</select>
 								</div>
 							</div>
@@ -341,7 +369,7 @@ export default class HotelEntry extends React.Component {
 								<div className="uk-form-controls">
 									<input className="uk-input"
 										id="service-name"
-										type="text"
+										type="email"
 										name="name"
 										autoComplete="off"
 										onChange={this.handleChange}
