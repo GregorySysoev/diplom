@@ -109,7 +109,7 @@ export default class HotelEntry extends React.Component {
 										id="service-category"
 										name="category"
 										onChange={this.handleChange}>
-										<option disabled selected hidden value="">укажите кол-во звёзд</option>
+										<option disabled selected hidden value="">Укажите кол-во звёзд</option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -135,6 +135,7 @@ export default class HotelEntry extends React.Component {
 								<div className="uk-form-controls">
 									<Select
 										isMulti
+										placeholder="Введите удобства"
 										options={facilities}
 									/>
 								</div>
@@ -144,6 +145,9 @@ export default class HotelEntry extends React.Component {
 								<div className="uk-form-controls">
 									<CreatableSelect
 										isMulti
+										placeholder="Укажите важные места"
+										noOptionsMessage={() => 'Укажите важные места'}
+										formatCreateLabel={value => `Добавить важное место "${value}"`}
 										onChange={this.handleChange1}
 									/>
 								</div>
@@ -155,7 +159,7 @@ export default class HotelEntry extends React.Component {
 										id="service-category"
 										name="category"
 										onChange={this.handleChange}>
-										<option disabled selected hidden value="">выберите регион</option>
+										<option disabled selected hidden value="">Выберите регион</option>
 										<option value="Деликатес">Дальневосточный</option>
 										<option value="Вино">Центральный</option>
 									</select>
@@ -168,7 +172,7 @@ export default class HotelEntry extends React.Component {
 										id="service-category"
 										name="category"
 										onChange={this.handleChange}>
-										<option disabled selected hidden value="">выберите город</option>
+										<option disabled selected hidden value="">Выберите город</option>
 										<option value="Деликатес">Владивосток</option>
 										<option value="Вино">Находка</option>
 										<option value="Вино">Уссурийск</option>
@@ -182,7 +186,7 @@ export default class HotelEntry extends React.Component {
 										id="service-category"
 										name="category"
 										onChange={this.handleChange}>
-										<option disabled selected hidden value="">выберите район</option>
+										<option disabled selected hidden value="">Выберите район</option>
 										<option value="Деликатес">Чуркин</option>
 										<option value="Вино">Эгершельд</option>
 									</select>

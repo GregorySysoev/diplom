@@ -19,10 +19,10 @@ export default function Header() {
                 <a href="/orders">Зарегистрировать прибывших клиентов</a>
               </li>
               <li>
-                <a href="/admin/landmarks">Проверить потребность в услугах</a>
+                <a href="/service/order/list">Проверить потребность в услугах</a>
               </li>
 			  <li>
-                <a href="/admin/landmarks">Просмотреть список услуг</a>
+                <a href="/service/list">Просмотреть список услуг</a>
               </li>
             </ul>
           </div>

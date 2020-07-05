@@ -38,6 +38,7 @@ export default function App() {
 		<div>
 			<Header/>
 			<BrowserRouter>
+				<Route exact path='/' component={Login}/>
 				<Route exact path='/login' component={Login}/>
 				<Route exact path='/hotel' component={HotelEntry}/>
 				<Route exact path='/actions' component={AvailableActions}/>
