@@ -23,13 +23,27 @@ export default class Bed extends Component {
                     beginMinutes: 0,
                     endHour: 23,
                     endMinutes: 59,
+                    lastId: 1,
                 },
             ],
-            lastId: 1,
+            startDate: new Date(),
+            endDate: new Date()
         }
 
     }
 
+
+    handleChangeStart = date => {
+        this.setState({
+            startDate: date
+        });
+    };
+
+    handleChangeEnd = date => {
+        this.setState({
+            endDate: date
+        });
+    };
 
     handleChange = (id, fieldName, fieldValue) => {
         this.setState(prevState => {
@@ -118,6 +132,9 @@ export default class Bed extends Component {
                                         <label className="uk-form-label" htmlFor="service-category">Дата начала: </label>
                                         <div className="uk-form-controls">
                                             <DatePicker
+                                                selected={this.state.startDate}
+                                                onChange={this.handleChangeStart}
+                                                selectsStart
                                             />
                                         </div>
                                     </div>
@@ -125,6 +142,9 @@ export default class Bed extends Component {
                                         <label className="uk-form-label" htmlFor="service-category">Дата конца: </label>
                                         <div className="uk-form-controls">
                                             <DatePicker
+                                                selected={this.state.endDate}
+                                                onChange={this.handleChangeEnd}
+                                                selectsEnd
                                             />
                                         </div>
                                     </div>
