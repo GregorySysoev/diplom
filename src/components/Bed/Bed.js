@@ -55,7 +55,7 @@ export default class Bed extends Component {
             <div>
                 <div className="uk-container uk-margin-top uk-margin-bottom">
                     <div className="uk-margin-top uk-margin-bottom">
-                        <a className="uk-link-muted" href="/service/new">Назад, к указанию основной информации</a>
+                        <a className="uk-link-muted" href="/hotel">Назад, к указанию основной информации</a>
                     </div>
                     <div>
                         <p className="uk-text-bold">Укажите типы спальных мест</p>
@@ -109,38 +109,38 @@ export default class Bed extends Component {
 
                                     {bed.type && (
                                         <>
-                                            <div className="uk-margin">
-                                                <label className="uk-form-label" htmlFor="adultCapacity">Вместимость взрослых: </label>
-                                                <div className="uk-form-controls">
-                                                    <input
-                                                        id="adultCapacity"
-                                                        className="uk-input"
-                                                        name="adultCapacity"
-                                                        type="number"
-                                                        value={bed.adultCapacity}
-                                                        onChange={event => this.handleChange(bed.id, event.target.name, +event.target.value)}
-                                                        step={1}
-                                                        min={0}
-                                                    />
-                                                </div>
-                                            </div>
-                                            {bed.type === bedType.KID && (
+                                            {bed.type === bedType.ADULT && (
                                                 <div className="uk-margin">
-                                                    <label className="uk-form-label" htmlFor="kidCapacity">Вместимость детей: </label>
+                                                    <label className="uk-form-label" htmlFor="adultCapacity">Вместимость взрослых: </label>
                                                     <div className="uk-form-controls">
                                                         <input
-                                                            id="kidCapacity"
+                                                            id="adultCapacity"
                                                             className="uk-input"
-                                                            name="kidCapacity"
-                                                            value={bed.kidCapacity}
-                                                            onChange={event => this.handleChange(bed.id, event.target.name, +event.target.value)}
+                                                            name="adultCapacity"
                                                             type="number"
+                                                            value={bed.adultCapacity}
+                                                            onChange={event => this.handleChange(bed.id, event.target.name, +event.target.value)}
                                                             step={1}
                                                             min={0}
                                                         />
                                                     </div>
                                                 </div>
                                             )}
+                                            <div className="uk-margin">
+                                                <label className="uk-form-label" htmlFor="kidCapacity">Вместимость детей: </label>
+                                                <div className="uk-form-controls">
+                                                    <input
+                                                        id="kidCapacity"
+                                                        className="uk-input"
+                                                        name="kidCapacity"
+                                                        value={bed.kidCapacity}
+                                                        onChange={event => this.handleChange(bed.id, event.target.name, +event.target.value)}
+                                                        type="number"
+                                                        step={1}
+                                                        min={0}
+                                                    />
+                                                </div>
+                                            </div>
                                         </>
                                     )}
                                 </fieldset>
