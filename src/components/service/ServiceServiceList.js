@@ -6,14 +6,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
-import NotInterestedIcon from "@material-ui/icons/NotInterested";
+import TablePagination from '@material-ui/core/TablePagination';
+import categories from "./categories";
 
 const headCells = [
     { id: 'name', label: 'Название' },
@@ -26,15 +24,31 @@ function createData(name, category, price) {
     return { name, category, price };
 }
 
-const rowsEmpty = [];
+const rowsBeforeAdd = [];
 
-const rows1 = [
-    // здесь можно добавить данные (лучше в порядке возрастания названия)
-    createData('Уборка в номере', 'Сервис', 0),
-    createData('Тщательная уборка в номере', 'Сервис', 500),
+const rowsAfterAdd = [
+    createData('Уборка в номере', categories.SERVICE, 0),
 ];
 
-const rows = rowsEmpty;
+const rowsAfterFastForwardAdd = [
+    ...rowsAfterAdd,
+    createData('Просьба разбудить', categories.SERVICE, 0),
+    createData('Прачечная', categories.SERVICE, 0),
+    createData('Няня', categories.SERVICE, 300),
+    createData('Транспорт до жд вокзала', categories.TRANSPORT, 110),
+    createData('Вызвать такси', categories.TRANSPORT, 0),
+    createData('Аренда велосипеда', categories.TRANSPORT, 500),
+    createData('Пропуск на парковку', categories.TRANSPORT, 0),
+    createData('Абонемент в спортзал', categories.ENTERTAINMENT, 300),
+    createData('Массаж', categories.ENTERTAINMENT, 1500),
+    createData('Аренда бильярдного стола', categories.ENTERTAINMENT, 1000),
+    createData('Боулинг', categories.ENTERTAINMENT, 1000),
+    createData('Футболка “Адмирал” мужская', categories.SOUVENIR, 1000),
+    createData('Футболка “Владивосток” женская', categories.SOUVENIR, 1000),
+    createData('Магнитик “Владивосток”', categories.SOUVENIR, 100),
+];
+
+const rows = rowsBeforeAdd;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FoodServiceList() {
     const classes = useStyles();
+
+    const rowsPerPage = 5;
+    const [currentPage, setCurrentPage] = React.useState(0);
 
     return (
         <div className={classes.root}>
@@ -77,11 +94,11 @@ export default function FoodServiceList() {
                                 <TableRow>
                                     <TableCell>
                                         <Typography variant="subheading" className={classes.emptyTitle}>
-                                            Нет услуг
+                                            Пусто
                                         </Typography>
                                     </TableCell>
                                 </TableRow>
-                            ) : rows.map((row, index) =>
+                            ) : rows.slice(currentPage * rowsPerPage, currentPage * rowsPerPage + rowsPerPage).map(row =>
                                     <TableRow
                                         hover
                                         key={row.name}
@@ -102,6 +119,17 @@ export default function FoodServiceList() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                {rows.length > 0 && (
+                    <TablePagination
+                        rowsPerPageOptions={[rowsPerPage]}
+                        component="div"
+                        count={rows.length}
+                        rowsPerPage={rowsPerPage}
+                        page={currentPage}
+                        onChangePage={(event, newPage) => setCurrentPage(newPage)}
+                        labelDisplayedRows={({from, to, count}) => `${from}-${to} из ${count}`}
+                    />
+                )}
             </Paper>
         </div>
     );
