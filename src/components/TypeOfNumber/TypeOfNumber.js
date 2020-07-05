@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Button from "../Button"
 import Select from 'react-select'
 import * as bedType from '../Bed/types'
+import ChooseBed from './ChooseBed'
 
 const facilities = [
     { id: 1, name: 'Бесплатный Wi-Fi' },
@@ -198,7 +199,7 @@ export default class Bed extends Component {
                     <div>
                         <p className="uk-text-bold">Укажите типы номеров</p>
                     </div>
-                    <form className="uk-form-horizontal uk-child-width-1-1 uk-child-width-1-2@s">
+                    <form className="uk-width-2xlarge uk-margin">
                         {this.state.timeRanges.map(range =>
                             <div key={range.id}>
                                 <fieldset style={{ border: '1px dashed #ccc' }}>
@@ -256,14 +257,7 @@ export default class Bed extends Component {
                                     </div>
                                     <div className="uk-margin">
                                         <label className="uk-form-label">Типы спальных мест: </label>
-                                        <div className="uk-form-controls">
-                                            <Select
-                                                options={groupedBeds}
-                                                formatGroupLabel={formatGroupLabel}
-                                                placeholder="Введите типы спальных мест"
-                                                noOptionsMessage={() => 'Такого типа спального места не найдено'}
-                                            />
-                                        </div>
+                                        <ChooseBed />
                                     </div>
                                     <br />
                                     <div className="uk-margin">
