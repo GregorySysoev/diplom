@@ -266,9 +266,9 @@ export default class Bed extends Component {
                                             <input className="uk-input"
                                                 id="roomsCount"
                                                 type="number"
-                                                min={0}
+                                                min={1}
                                                 step={1}
-                                                defaultValue={0}
+                                                defaultValue={1}
                                                 name="roomsCount"
                                                 autoComplete="off"
                                                 onChange={this.handleChange}
@@ -282,9 +282,9 @@ export default class Bed extends Component {
                                                 id="availableRoomsCount"
                                                 name="availableRoomsCount"
                                                 type="number"
-                                                min={0}
+                                                min={1}
                                                 step={1}
-                                                defaultValue={0} />
+                                                defaultValue={1} />
                                         </div>
                                     </div>
                                     <br />
