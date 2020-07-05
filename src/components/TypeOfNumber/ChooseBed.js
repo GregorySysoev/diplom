@@ -11,7 +11,7 @@ const predefinedBeds = [
         name: 'Двухспальная кровать',
         type: bedType.ADULT,
         adultCapacity: 2,
-        kidCapacity: 2,
+        kidCapacity: 1,
     },
     {
         id: 2,
@@ -35,7 +35,7 @@ const enteredBeds = [
         name: 'Очень большая двуспальная кровать',
         type: bedType.ADULT,
         adultCapacity: 2,
-        kidCapacity: 3,
+        kidCapacity: 1,
     },
 ];
 
