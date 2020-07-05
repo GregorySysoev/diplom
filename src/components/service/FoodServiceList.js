@@ -12,6 +12,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
+import Typography from "@material-ui/core/Typography";
 
 const headCells = [
     { id: 'name', label: 'Название' },
@@ -26,12 +27,16 @@ function createData(name, category, hasPortions, hasOptions, priceRange) {
     return { name, category, hasPortions, hasOptions, priceRange };
 }
 
-const rows = [
+const rowsEmpty = [];
+
+const rows1 = [
     // здесь можно добавить данные (лучше в порядке возрастания названия)
     createData('Коньяк "Грузия"', 'Алкоголь', true, false, 'от 250 до 1200₽'),
     createData('Коньяк "Грузия" 2', 'Алкоголь', false, false, null),
     createData('Вареники со сметаной', 'Горячее', true, false, 'от 100 до 250₽')
 ];
+
+const rows = rowsEmpty;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
     },
     row: {
         cursor: 'pointer',
+    },
+    emptyTitle: {
+        textAlign: 'center',
     },
 }));
 
@@ -70,7 +78,15 @@ export default function FoodServiceList() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row, index) =>
+                            {rows.length === 0 ? (
+                                <TableRow>
+                                    <TableCell>
+                                        <Typography variant="subheading" className={classes.emptyTitle}>
+                                            Нет услуг
+                                        </Typography>
+                                    </TableCell>
+                                </TableRow>
+                            ) : rows.map((row, index) =>
                                 <TableRow
                                     hover
                                     key={row.name}

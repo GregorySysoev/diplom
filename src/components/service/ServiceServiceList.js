@@ -11,6 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
+import NotInterestedIcon from "@material-ui/icons/NotInterested";
 
 const headCells = [
     { id: 'name', label: 'Название' },
@@ -23,11 +26,15 @@ function createData(name, category, price) {
     return { name, category, price };
 }
 
-const rows = [
+const rowsEmpty = [];
+
+const rows1 = [
     // здесь можно добавить данные (лучше в порядке возрастания названия)
     createData('Уборка в номере', 'Сервис', 0),
     createData('Тщательная уборка в номере', 'Сервис', 500),
 ];
+
+const rows = rowsEmpty;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -66,23 +73,31 @@ export default function FoodServiceList() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row, index) =>
-                                <TableRow
-                                    hover
-                                    key={row.name}
-                                    className={classes.row}
-                                >
-                                    <TableCell component="th" scope="row">
-                                        {row.name}
-                                    </TableCell>
-                                    <TableCell>{row.category}</TableCell>
-                                    <TableCell>{!row.price ? <i>Бесплатно</i> : `${row.price}₽`}</TableCell>
+                            {rows.length === 0 ? (
+                                <TableRow>
                                     <TableCell>
-                                        <IconButton>
-                                            <DeleteIcon />
-                                        </IconButton>
+                                        <Typography variant="subheading" className={classes.emptyTitle}>
+                                            Нет услуг
+                                        </Typography>
                                     </TableCell>
                                 </TableRow>
+                            ) : rows.map((row, index) =>
+                                    <TableRow
+                                        hover
+                                        key={row.name}
+                                        className={classes.row}
+                                    >
+                                        <TableCell component="th" scope="row">
+                                            {row.name}
+                                        </TableCell>
+                                        <TableCell>{row.category}</TableCell>
+                                        <TableCell>{!row.price ? <i>Бесплатно</i> : `${row.price}₽`}</TableCell>
+                                        <TableCell>
+                                            <IconButton>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
                             )}
                         </TableBody>
                     </Table>
