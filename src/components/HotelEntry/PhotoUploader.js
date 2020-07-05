@@ -19,7 +19,7 @@ const PhotoUploader = ({ addPhoto, removePhoto, setMain, mainPhotoId, photoIds, 
             {photoIds.map(id => <div key={id}>
                 <div className="uk-card uk-card-default">
                     <div className="uk-card-media-top uk-inline">
-                        <img src={`/service-photos/${id}.png`} alt={id}/> {/* TODO: не забыть поменять расширение! */}
+                        <img src={`/hotel-photos/${id}.jpg`} alt={id}/> {/* TODO: не забыть поменять расширение! */}
 
                         {mainPhotoId !== id
                             ? <div className="uk-position-bottom-left uk-overlay" style={{ padding: '5px' }}>

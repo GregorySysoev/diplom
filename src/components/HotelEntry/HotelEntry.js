@@ -200,7 +200,6 @@ export default class HotelEntry extends React.Component {
 	};
 
 	handleChange = event => {
-		console.log(event.target.value)
 		this.setState({ [event.target.name]: event.target.value })
 	}
 
@@ -229,11 +228,6 @@ export default class HotelEntry extends React.Component {
 
 	setMainPhoto = id => {
 		this.setState({ mainPhotoId: id });
-	}
-
-	handleChange = event => {
-		console.log(event.target.value)
-		this.setState({ [event.target.name]: event.target.value })
 	}
 
 	render() {
