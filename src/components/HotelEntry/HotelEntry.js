@@ -1,24 +1,9 @@
 import React from "react"
 import './hotelEntry.sass'
 import PhotoUploader from "./PhotoUploader";
-import Select from 'react-select'
 import CreatableSelect from 'react-select/creatable';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-
-const facilities = [
-	{ id: 1, name: 'Бесплатный Wi-Fi' },
-	{ id: 2, name: 'Номера для некурящих' },
-	{ id: 3, name: 'Терраса' },
-	{ id: 4, name: 'Отопление' },
-	{ id: 5, name: 'Лифт' },
-	{ id: 6, name: 'Кондиционер' },
-	{ id: 7, name: 'Парковка' },
-	{ id: 8, name: 'Трансфер от/до аэропорта' },
-	{ id: 9, name: 'Семейные номера' },
-	{ id: 10, name: 'Кофеварка/чайник во всех номерах' },
-	{ id: 11, name: 'Круглосуточная стойка регистрации' },
-];
 
 const regions = [
 	{ id: 1, name: "Республика Адыгея" },
@@ -280,19 +265,6 @@ export default class HotelEntry extends React.Component {
 										onChange={this.handleChange}
 										style={{ minHeight: '100px' }}
 										placeholder="" />
-								</div>
-							</div>
-							<div className="uk-margin">
-								<label className="uk-form-label" htmlFor="service-name">Удобства: </label>
-								<div className="uk-form-controls">
-									<Select
-										isMulti
-										placeholder="Введите удобства"
-										options={facilities.sort(nameComparator).map(f => ({
-											value: f.id,
-											label: f.name,
-										}))}
-									/>
 								</div>
 							</div>
 							<div className="uk-margin">
