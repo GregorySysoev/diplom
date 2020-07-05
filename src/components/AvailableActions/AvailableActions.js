@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from "../Header"
 import './availableActions.sass'
 import '../../css/styles.sass'
 
@@ -12,7 +11,7 @@ export default class AvailableActions extends React.Component {
                     <div>
                         <ul id="available-actions-list">
                             <li><a href="/hotel">Отредактировать информацию о гостинице</a></li>
-                            <li><a href="">Зарегистрировать прибывших клиентов</a></li>
+                            <li><a href="/orders">Зарегистрировать прибывших клиентов</a></li>
                             <li><a href="/service/order/list">Проверить потребность в услугах</a></li>
                             <li><a href="/service/list">Просмотреть список услуг</a></li>
                         </ul>

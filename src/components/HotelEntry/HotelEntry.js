@@ -1,8 +1,6 @@
 import React from "react"
 import './hotelEntry.sass'
-import Header from "../Header"
 import PhotoUploader from "./PhotoUploader";
-import Dropzone from 'react-dropzone-uploader';
 import Select from 'react-select'
 import CreatableSelect from 'react-select/creatable';
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
-import './styles.sass';
+import './clientRegistration.sass';
 import * as serviceTypes from '../types';
 import * as orderStatuses from '../Orders/statuses';
 import { v4 as uuidv4 } from 'uuid';
+import CreatableSelect from 'react-select/creatable';
 
 const ClientRegistratioin = props => {
     // props = [
@@ -19,6 +20,14 @@ const ClientRegistratioin = props => {
     // ]
 
     const alreadyProcessed = props.status && props.status !== orderStatuses.PENDING;
+
+    const updateNumber = () => {
+        alert('Данные обновлены');
+    }
+
+    const cancelOrder = () => {
+        prompt('Отменить заказ? Введите слово "ОТМЕНА"');
+    }
 
     return (<div>
         <div className="uk-container uk-margin-top uk-margin-bottom">
@@ -71,24 +80,24 @@ const ClientRegistratioin = props => {
             <div className="uk-margin">
                 <label htmlFor="manager-comment">
                     <p style={{ marginBottom: '.25em' }}>
-                        Номер комнаты:
+                        Номера комнат:
                     </p>
                 </label>
                 <div className="uk-form-controls">
-                    <input className="uk-input"
-                        id="service-name"
-                        type="text"
-                        name="name"
-                        autoComplete="off"
-                        placeholder="" />
+                    <CreatableSelect
+                        isMulti
+                        placeholder="Введите номера комнат"
+                        noOptionsMessage={() => 'Введите номера комнат'}
+                        formatCreateLabel={value => `Добавить номер "${value}"`}
+                    />
                 </div>
                 <div className="uk-form-controls">
                 </div>
             </div>
             {!alreadyProcessed && (
                 <div className="uk-margin">
-                <Button type="button" label="Обновить" />
-                    <Button type="button" label="Отменить заказ" />
+                    <Button onClick={updateNumber} type="button" label="Обновить" />
+                    <span id="cancel-btn"><Button onClick={cancelOrder} type="button" label="Отменить заказ" /> </span>
                 </div>
             )}
         </div>
