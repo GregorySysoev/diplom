@@ -227,7 +227,7 @@ export default class HotelEntry extends React.Component {
 					</div>
 					<form className="uk-form-horizontal" data-uk-grid>
 
-						<div className="uk-width-2-5@m">
+						<div className="uk-width-2xlarge uk-margin">
 							<div className="uk-margin">
 								<label className="uk-form-label" htmlFor="service-name">Название: </label>
 								<div className="uk-form-controls">
@@ -346,7 +346,7 @@ export default class HotelEntry extends React.Component {
 										onlyCountries={['ru']}
 										country={'ru'}
 										value=""
-										onChange={() => {}}
+										onChange={() => { }}
 										placeholder="+7 (800) 555-35-35"
 										disableDropdown={true}
 									/>
@@ -364,20 +364,19 @@ export default class HotelEntry extends React.Component {
 										placeholder="" />
 								</div>
 							</div>
+							<div className="uk-margin">
+								<PhotoUploader
+									setMain={this.setMainPhoto}
+									addPhoto={this.addPhoto}
+									removePhoto={this.removePhoto}
+									photoIds={this.state.photoIds}
+									mainPhotoId={this.state.mainPhotoId}
+									lastPhotoId={this.state.lastPhotoId}
+								/>
+							</div>
 							<div>
 								<a href="/bed" className="uk-button uk-button-primary" type="submit">Далее</a>
 							</div>
-						</div>
-
-						<div className="uk-width-2-5@m">
-							<PhotoUploader
-								setMain={this.setMainPhoto}
-								addPhoto={this.addPhoto}
-								removePhoto={this.removePhoto}
-								photoIds={this.state.photoIds}
-								mainPhotoId={this.state.mainPhotoId}
-								lastPhotoId={this.state.lastPhotoId}
-							/>
 						</div>
 					</form>
 				</div>
