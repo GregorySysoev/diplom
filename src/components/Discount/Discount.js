@@ -152,7 +152,7 @@ export default class Bed extends Component {
                             </div>
                         )}
                         <div>
-                            <Button type="button" label="Добавить ещё тип номера" onClick={this.addRange} />
+                            <Button type="button" label="Добавить ещё скидку на тип номера" onClick={this.addRange} />
                         </div>
                     </form>
                     <div className="uk-margin-large-top">
