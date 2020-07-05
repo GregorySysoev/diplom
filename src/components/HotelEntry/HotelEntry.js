@@ -3,6 +3,8 @@ import './hotelEntry.sass'
 import PhotoUploader from "./PhotoUploader";
 import Select from 'react-select'
 import CreatableSelect from 'react-select/creatable';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const facilities = [
 	{ id: 1, name: 'Бесплатный Wi-Fi' },
@@ -374,13 +376,14 @@ export default class HotelEntry extends React.Component {
 							<div className="uk-margin">
 								<label className="uk-form-label" htmlFor="service-name">Телефон: </label>
 								<div className="uk-form-controls">
-									<input className="uk-input"
-										id="service-name"
-										type="text"
-										name="name"
-										autoComplete="off"
-										onChange={this.handleChange}
-										placeholder="" />
+									<PhoneInput
+										onlyCountries={['ru']}
+										country={'ru'}
+										value=""
+										onChange={() => {}}
+										placeholder="+7 (800) 555-35-35"
+										disableDropdown={true}
+									/>
 								</div>
 							</div>
 							<div className="uk-margin">
