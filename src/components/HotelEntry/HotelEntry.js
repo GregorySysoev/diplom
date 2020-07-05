@@ -99,6 +99,50 @@ const regions = [
 	{ id: 99, name: "Иные территории" },
 ];
 
+const cities = [
+	{ id: 1, name: "Абакан" },
+	{ id: 2, name: "Азов" },
+	{ id: 3, name: "Александров" },
+	{ id: 4, name: "Алексин" },
+	{ id: 5, name: "Альметьевск" },
+	{ id: 6, name: "Анапа" },
+	{ id: 7, name: "Ангарск" },
+	{ id: 8, name: "Анжеро-Судженск" },
+	{ id: 9, name: "Апатиты" },
+	{ id: 10, name: "Арзамас" },
+	{ id: 11, name: "Армавир" },
+	{ id: 12, name: "Арсеньев" },
+	{ id: 13, name: "Артем" },
+	{ id: 14, name: "Архангельск" },
+	{ id: 15, name: "Асбест" },
+	{ id: 16, name: "Астрахань" },
+	{ id: 17, name: "Ачинск" },
+	{ id: 18, name: "Балаково" },
+	{ id: 19, name: "Балахна" },
+	{ id: 20, name: "Великие Луки" },
+	{ id: 21, name: "Великий Новгород" },
+	{ id: 22, name: "Верхняя Пышма" },
+	{ id: 23, name: "Видное" },
+	{ id: 24, name: "Владивосток" },
+	{ id: 25, name: "Владикавказ" },
+	{ id: 26, name: "Владимир" },
+	{ id: 27, name: "Волгоград" },
+	{ id: 28, name: "Волгодонск" },
+	{ id: 29, name: "Волжск" },
+	{ id: 30, name: "Волжский" },
+	{ id: 31, name: "Вологда" },
+	{ id: 32, name: "Вольск" },
+	{ id: 33, name: "Воркута" },
+	{ id: 34, name: "Воронеж" },
+	{ id: 35, name: "Воскресенск" },
+	{ id: 36, name: "Воткинск" },
+	{ id: 37, name: "Всеволожск" },
+	{ id: 38, name: "Выборг" },
+	{ id: 39, name: "Выкса" },
+	{ id: 40, name: "Вязьма" },
+
+];
+
 export default class HotelEntry extends React.Component {
 	constructor(props) {
 		super(props)
@@ -260,9 +304,9 @@ export default class HotelEntry extends React.Component {
 										name="category"
 										onChange={this.handleChange}>
 										<option disabled selected hidden value="">Выберите город</option>
-										<option value="Деликатес">Владивосток</option>
-										<option value="Вино">Находка</option>
-										<option value="Вино">Уссурийск</option>
+										{cities.map(c => (
+											<option value={c.id}>{c.name}</option>
+										))}
 									</select>
 								</div>
 							</div>
