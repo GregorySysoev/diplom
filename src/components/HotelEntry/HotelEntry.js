@@ -158,6 +158,17 @@ const districts = [
 	{ id: 5, name: 'Фрунзенский', cityId: 24 },
 ];
 
+const nameComparator = (a, b) => {
+	if (a.name < b.name) {
+		return -1;
+	}
+	if (a.name > b.name) {
+		return 1;
+	}
+	// a must be equal to b
+	return 0;
+};
+
 export default class HotelEntry extends React.Component {
 	constructor(props) {
 		super(props)
@@ -281,7 +292,7 @@ export default class HotelEntry extends React.Component {
 									<Select
 										isMulti
 										placeholder="Введите удобства"
-										options={facilities.map(f => ({
+										options={facilities.sort(nameComparator).map(f => ({
 											value: f.id,
 											label: f.name,
 										}))}
@@ -309,9 +320,11 @@ export default class HotelEntry extends React.Component {
 										onChange={this.handleChange}
 									>
 										<option disabled selected hidden value="">Выберите регион</option>
-										{regions.map(r => (
-											<option id={r.id} value={r.id}>{r.name}</option>
-										))}
+										{
+											regions
+												.sort(nameComparator)
+												.map(r => <option id={r.id} value={r.id}>{r.name}</option>)
+										}
 									</select>
 								</div>
 							</div>
@@ -327,9 +340,12 @@ export default class HotelEntry extends React.Component {
 										<option disabled selected hidden value="">
 											{this.state.regionId ? 'Выберите город' : null}
 										</option>
-										{this.state.regionId && cities.filter(c => c.regionId == this.state.regionId).map(c => (
-											<option id={c.id} value={c.id}>{c.name}</option>
-										))}
+										{this.state.regionId &&
+											cities
+												.filter(c => c.regionId == this.state.regionId)
+												.sort(nameComparator)
+												.map(c => <option id={c.id} value={c.id}>{c.name}</option>)
+										}
 									</select>
 								</div>
 							</div>
@@ -345,9 +361,12 @@ export default class HotelEntry extends React.Component {
 										<option disabled selected hidden value="">
 											{this.state.cityId ? 'Выберите район' : null}
 										</option>
-										{this.state.cityId && districts.filter(d => d.cityId == this.state.cityId).map(d => (
-											<option id={d.id} value={d.id}>{d.name}</option>
-										))}
+										{this.state.cityId &&
+											districts
+												.filter(d => d.cityId == this.state.cityId)
+												.sort(nameComparator)
+												.map(d => <option id={d.id} value={d.id}>{d.name}</option>)
+										}
 									</select>
 								</div>
 							</div>
