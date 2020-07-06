@@ -7,28 +7,23 @@ import * as orderStatuses from "./statuses";
 const FoodOrderDetailsPage = props => {
     const data = {
         serviceType: serviceTypes.FOOD,
-        room: '305',
-        orderDate: '24.07.2020 14:50',
-        serveDate: '24.07.2020 15:30',
-        orderId: 1002,
-        serviceName: 'Вареники со сметаной',
+        room: '206',
+        orderDate: '05.07.2020 17:39',
+        serveDate: null,
+        orderId: 2,
+        serviceName: 'Вок с курицей и лапшой удон',
         portion: {
-            size: 305,
-            unit: 'грамм',
+            size: 300,
+            unit: 'гр',
             price: 350,
         },
+        portionCount: 2,
         options: [
             {
                 name: 'Лук',
                 size: 10,
-                unit: 'грамм',
-                price: 50,
-            },
-            {
-                name: 'Сметана',
-                size: 15,
-                unit: 'грамм',
-                price: 50,
+                unit: 'гр',
+                price: 15,
             },
         ],
     };
