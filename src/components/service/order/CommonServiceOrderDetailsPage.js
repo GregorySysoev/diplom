@@ -26,7 +26,7 @@ const CommonServiceOrderDetailsPage = props => {
     return (
         <div className="uk-container uk-margin-top uk-margin-bottom">
             <div className="uk-margin-top uk-margin-bottom">
-                <a className="uk-link-muted" href="#">Назад, к доступным действиям</a>
+                <a className="uk-link-muted" href="/service/order/list">Назад, к доступным действиям</a>
             </div>
             <p className="uk-text-bold" style={{ marginBottom: '.5em' }}>Информация о заказанной услуге</p>
             <div className="order-details">

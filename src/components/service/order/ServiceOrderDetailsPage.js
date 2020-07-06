@@ -7,12 +7,12 @@ import * as orderStatuses from "./statuses";
 const ServiceOrderDetailsPage = props => {
     const data = {
         serviceType: serviceTypes.SERVICE,
-        room: '159',
-        orderDate: '24.07.2020 11:53',
-        serveDate: '24.07.2020 13:00',
-        orderId: 1001,
-        serviceName: 'Поменять постель',
-        customerComment: 'Постарайтесь успеть до 13:00',
+        room: '206',
+        orderDate: '05.07.2020 17:39',
+        serveDate: null,
+        orderId: 2,
+        serviceName: 'Уборка в номере',
+        customerComment: null,
         price: 0,
     };
     return <CommonServiceOrderDetailsPage

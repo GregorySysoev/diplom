@@ -24,8 +24,7 @@ import ClientRegistration from "./components/ClientRegistration/ClientRegistrati
 
 const ProcessedServiceOrderDetailsPage = () =>
 	<ServiceOrderDetailsPage
-		status={orderStatuses.DENIED}
-		managerComment={'У вас уже убрано!'}
+		status={orderStatuses.COMPLETED}
 	/>;
 
 const ProcessedFoodOrderDetailsPage = () =>
