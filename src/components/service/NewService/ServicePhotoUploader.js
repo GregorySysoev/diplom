@@ -2,13 +2,9 @@ import React, { useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone-uploader';
 import 'react-dropzone-uploader/dist/styles.css';
+import * as serviceTypes from '../types';
 
-const servicePhotoPath = '/service-service-photos';
-const foodPhotoPath = '/service-food-photos';
-
-const photoPath = foodPhotoPath;
-
-const PhotoUploader = ({ addPhoto, removePhoto, setMain, mainPhotoId, photoIds, lastPhotoId }) => {
+const ServicePhotoUploader = ({ addPhoto, removePhoto, setMain, mainPhotoId, photoIds, lastPhotoId, serviceType }) => {
     const dropzone = useRef(null);
 
     const onChangeStatus = useCallback(({ meta, file, xhr }, status) => {
@@ -18,6 +14,8 @@ const PhotoUploader = ({ addPhoto, removePhoto, setMain, mainPhotoId, photoIds, 
             dropzone.current.files.forEach(f => f.remove());
         }
     }, [dropzone.current, addPhoto, lastPhotoId]);
+
+    const photoPath = serviceType === serviceTypes.FOOD ? '/service-food-photos' : '/service-service-photos';
 
     return <>
         <div uk-grid className="uk-grid uk-grid-small uk-child-width-1-2 uk-child-width-1-4@s uk-text-center">
@@ -57,13 +55,14 @@ const PhotoUploader = ({ addPhoto, removePhoto, setMain, mainPhotoId, photoIds, 
     </>;
 };
 
-PhotoUploader.propTypes = {
+ServicePhotoUploader.propTypes = {
     setMain: PropTypes.func.isRequired,
     addPhoto: PropTypes.func.isRequired,
     removePhoto: PropTypes.func.isRequired,
     photoIds: PropTypes.array,
     mainPhotoId: PropTypes.number,
     lastPhotoId: PropTypes.number,
+    serviceType: PropTypes.oneOf(Object.values(serviceTypes)),
 };
 
-export default PhotoUploader;
+export default ServicePhotoUploader;

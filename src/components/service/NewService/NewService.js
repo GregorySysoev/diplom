@@ -1,13 +1,14 @@
 import React from 'react'
 import './newservice.sass'
-import PhotoUploader from './PhotoUploader';
+import ServicePhotoUploader from './ServicePhotoUploader';
 import categories from '../categories';
+import * as serviceType from '../types';
 
 export default class NewService extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			type: 'food',
+			type: serviceType.FOOD,
 			name: '',
 			description: '',
 			category: '',
@@ -64,20 +65,20 @@ export default class NewService extends React.Component {
 					<div className="service-type uk-width-1-5@m">
 						<span className="uk-padding-small">Выберите тип услуги</span>
 						<div className="uk-margin uk-child-width-auto uk-flex uk-flex-column "
-							 onChange={this.handleChange}>
+							 onChange={event => this.setState({ [event.target.name]: +event.target.value })}>
 							<label className="uk-padding-small">
 								<input className="uk-radio"
 									   type="radio"
 									   name="type"
 									   defaultChecked
-									   value="food"/>
+									   value={serviceType.FOOD}/>
 								<span> Блюдо или напиток </span>
 							</label>
 							<label className="uk-padding-small">
 								<input className="uk-radio"
 									   type="radio"
 									   name="type"
-									   value="service"/>
+									   value={serviceType.SERVICE}/>
 								<span> Сервис </span>
 							</label>
 						</div>
@@ -115,7 +116,7 @@ export default class NewService extends React.Component {
 										defaultValue="">
 									<option disabled hidden value="">Выберите категорию</option>
 									{Object.values(categories).sort().map((name, index) => (
-										<option id={index} value={name}>{name}</option>
+										<option key={index} value={name}>{name}</option>
 									))}
 								</select>
 							</div>
@@ -168,13 +169,14 @@ export default class NewService extends React.Component {
 						</div>
 					</div>
 					<div className="uk-width-2-5@m">
-						<PhotoUploader
+						<ServicePhotoUploader
 							setMain={this.setMainPhoto}
 							addPhoto={this.addPhoto}
 							removePhoto={this.removePhoto}
 							photoIds={this.state.photoIds}
 							mainPhotoId={this.state.mainPhotoId}
 							lastPhotoId={this.state.lastPhotoId}
+							serviceType={this.state.type}
 						/>
 					</div>
 					<div>
