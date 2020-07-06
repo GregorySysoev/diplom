@@ -15,6 +15,14 @@ const CommonServiceOrderDetailsPage = props => {
 
     const alreadyProcessed = props.status && props.status !== orderStatuses.PENDING;
 
+    const getOnePortionPrice = () => {
+        const optionsTotalPrice = props.options.reduce((acc, o) => acc + o.price || 0, 0);
+        return props.portion.price + optionsTotalPrice;
+    };
+    const getFoodTotalPrice = () => {
+        return getOnePortionPrice() * props.portionCount;
+    };
+
     return (
         <div className="uk-container uk-margin-top uk-margin-bottom">
             <div className="uk-margin-top uk-margin-bottom">
@@ -24,14 +32,17 @@ const CommonServiceOrderDetailsPage = props => {
             <div className="order-details">
                 <p><span className="uk-text-muted">Комната: </span>{props.room}</p>
                 <p><span className="uk-text-muted">Дата заказа: </span>{props.orderDate}</p>
-                <p><span className="uk-text-muted">Указанная дата: </span>{props.serveDate}</p>
+                <p><span className="uk-text-muted">Указанная дата: </span>{props.serveDate || <i>ближайшее время</i>}</p>
                 <p><span className="uk-text-muted">Номер заказа: </span>{`№${props.orderId}`}</p>
                 <p><span className="uk-text-muted">Название услуги: </span>{props.serviceName}</p>
                 {props.serviceType === serviceTypes.FOOD && (
-                    <p>
-                        <span className="uk-text-muted">Размер порции: </span>
-                        {`${props.portion.size} ${props.portion.unit}`}
-                    </p>
+                    <>
+                        <p>
+                            <span className="uk-text-muted">Размер порции: </span>
+                            {`${props.portion.size} ${props.portion.unit}`}
+                        </p>
+                        <p><span className="uk-text-muted">Количество порций: </span>{props.portionCount}</p>
+                    </>
                 )}
                 <p>
                     <span className="uk-text-muted">Комментарий: </span>
@@ -53,12 +64,10 @@ const CommonServiceOrderDetailsPage = props => {
                         ))}
                     </div>
                     <p>
-                        <span className="uk-text-muted">Цена услуги: </span>
-                        {props.portion.price ? `${props.portion.price}₽` : 'бесплатно'}
-                    </p>
-                    <p>
                         <span className="uk-text-muted">Итоговая цена: </span>
-                        {`${props.options.reduce((acc, o) => acc + o.price || 0, 0) + props.portion.price || 0}₽`}
+                        {props.portion.price
+                            ? (props.portionCount > 1 ? `${getOnePortionPrice()}₽ x ${props.portionCount} = ${getFoodTotalPrice()}₽` : `${getOnePortionPrice()}₽`)
+                            : 'бесплатно'}
                     </p>
                 </>
             )}
@@ -125,7 +134,7 @@ const CommonServiceOrderDetailsPage = props => {
                 </div>
             </div>
             {!alreadyProcessed && (
-                <Button type="button" label="Изменить статус"/>
+                <a href="/null" className="uk-button uk-button-primary">Изменить статус</a>
             )}
         </div>
     )
@@ -141,12 +150,13 @@ CommonServiceOrderDetailsPage.propTypes = {
     serviceType: PropTypes.oneOf(Object.values(serviceTypes)).isRequired,
     room: PropTypes.string.isRequired,
     orderDate: PropTypes.string.isRequired,
-    serveDate: PropTypes.string.isRequired,
+    serveDate: PropTypes.string,
     orderId: PropTypes.number.isRequired,
     serviceName: PropTypes.string.isRequired,
     customerComment: PropTypes.string,
     price: PropTypes.number,
     portion: PropTypes.shape(portionPropShape),
+    portionCount: PropTypes.number,
     options: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
         ...portionPropShape,

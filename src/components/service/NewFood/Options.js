@@ -121,7 +121,7 @@ class Options extends Component {
                                     </div>
                                 </div>
                                 <div className="uk-margin-bottom">
-                                    <label className="uk-form-label uk-margin-remove-top">Цена </label>
+                                    <label className="uk-form-label uk-margin-remove-top">Цена (₽) </label>
                                     <div className="uk-form-controls">
                                         <input type="number"
                                                className="uk-input"

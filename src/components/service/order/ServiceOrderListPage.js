@@ -8,8 +8,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
+import { v4 as uuidv4 } from 'uuid';
 import * as serviceTypes from '../types';
 import * as orderStatuses from './statuses';
+import TablePagination from "@material-ui/core/TablePagination";
+import Typography from "@material-ui/core/Typography";
 
 const headCells = [
     { id: 'name', label: 'Название' },
@@ -21,19 +24,29 @@ const headCellsWithSort = [
     { id: 'date', label: 'Дата создания заказа', sortDirection: 'asc' },
 ];
 
-function createData(name, room, serviceType, date) {
-    return { name, room, serviceType, date };
+function createRow(name, room, serviceType, date, isDark = false) {
+    return { id: uuidv4(), name, room, serviceType, date, isDark };
 }
 
 // здесь можно добавить данные (в порядке возрастания даты, сгруппировать по номеру заказа)
-const pendingRows = [
-    createData('Вареники со сметаной (pending)', '101', serviceTypes.SERVICE, '24.07.2020 11:53'),
+const room = '206';
+const orderCreationDate = '05.07.2020 17:39';
+let pendingRows = [
+    // createRow('Смузи смородина-кокос', room, serviceTypes.FOOD, orderCreationDate),
+    // createRow('Уборка в номере', room, serviceTypes.SERVICE, orderCreationDate),
 ];
 const completedRows = [
-    createData('Вареники со сметаной (completed)', '101', serviceTypes.SERVICE, '24.07.2020 11:53'),
+    // createRow('Вок с курицей и лапшой удон', room, serviceTypes.FOOD, orderCreationDate),
 ];
 const deniedRows = [
-    createData('Вареники со сметаной (denied)', '101', serviceTypes.SERVICE, '24.07.2020 11:53'),
+
+];
+
+const delayMs = 2000;
+const pendingRowsDelayed = [
+    createRow('Смузи смородина-кокос', room, serviceTypes.FOOD, orderCreationDate),
+    createRow('Вок с курицей и лапшой удон', room, serviceTypes.FOOD, orderCreationDate),
+    createRow('Уборка в номере', room, serviceTypes.SERVICE, orderCreationDate),
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -50,23 +63,49 @@ const useStyles = makeStyles((theme) => ({
     row: {
         cursor: 'pointer',
     },
+    get rowDark() {
+        return {
+            ...this.row,
+            backgroundColor: theme.palette.action.hover,
+        };
+    },
 }));
 
 function ServiceOrderListPage() {
     const [currentStatus, setCurrentStatus] = React.useState(orderStatuses.PENDING);
+    const [rows, setRows] = React.useState([]);
 
-    const rowsToDisplay =
-        currentStatus === orderStatuses.PENDING
+    const getRowsByStatus = React.useCallback(status => {
+        return status === orderStatuses.PENDING
             ? pendingRows
-            : currentStatus === orderStatuses.COMPLETED
+            : status === orderStatuses.COMPLETED
                 ? completedRows
-                : currentStatus === orderStatuses.DENIED
+                : status === orderStatuses.DENIED
                     ? deniedRows
                     : [];
+    }, [currentStatus]);
+
+    React.useEffect(() => {
+        setRows(getRowsByStatus(currentStatus));
+    }, [currentStatus]);
+
+    const addRows = React.useCallback(rows => {
+        setRows([...rows, ...getRowsByStatus(currentStatus)]);
+    }, [currentStatus]);
+
+    React.useEffect(() => {
+        setTimeout(() => {
+            addRows(pendingRowsDelayed);
+            pendingRows = [...pendingRows, ...pendingRowsDelayed];
+        }, delayMs);
+    }, []);
 
     const handleOrderStatusChange = event => {
         setCurrentStatus(+event.target.value);
     };
+
+    const rowsPerPage = 5;
+    const [currentPage, setCurrentPage] = React.useState(0);
 
     const classes = useStyles();
 
@@ -128,11 +167,18 @@ function ServiceOrderListPage() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rowsToDisplay.map((row, index) =>
+                                {rows.length === 0 ? (
+                                    <TableRow>
+                                        <TableCell>
+                                            <Typography variant="subheading" className={classes.emptyTitle}>
+                                                Пусто
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                ) : rows.slice(currentPage * rowsPerPage, currentPage * rowsPerPage + rowsPerPage).map(row =>
                                     <TableRow
-                                        hover
-                                        key={row.name}
-                                        className={classes.row}
+                                        key={row.id}
+                                        className={row.isDark ? classes.rowDark : classes.row}
                                     >
                                         <TableCell component="th" scope="row">
                                             {row.name}
@@ -153,6 +199,17 @@ function ServiceOrderListPage() {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    {rows.length > 0 && (
+                        <TablePagination
+                            rowsPerPageOptions={[rowsPerPage]}
+                            component="div"
+                            count={rows.length}
+                            rowsPerPage={rowsPerPage}
+                            page={currentPage}
+                            onChangePage={(event, newPage) => setCurrentPage(newPage)}
+                            labelDisplayedRows={({from, to, count}) => `${from}-${to} из ${count}`}
+                        />
+                    )}
                 </Paper>
             </div>
         </div>

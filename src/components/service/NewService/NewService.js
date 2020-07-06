@@ -1,6 +1,7 @@
 import React from 'react'
 import './newservice.sass'
-import PhotoUploader from "./PhotoUploader";
+import PhotoUploader from './PhotoUploader';
+import categories from '../categories';
 
 export default class NewService extends React.Component {
 	constructor(props) {
@@ -113,14 +114,15 @@ export default class NewService extends React.Component {
 										onChange={this.handleChange}
 										defaultValue="">
 									<option disabled hidden value="">Выберите категорию</option>
-									<option value="Деликатес">Деликатес</option>
-									<option value="Вино">Вино</option>
+									{Object.values(categories).sort().map((name, index) => (
+										<option id={index} value={name}>{name}</option>
+									))}
 								</select>
 							</div>
 						</div>
 						{this.state.type !== 'food' && (
 							<div className="uk-margin">
-								<label className="uk-form-label" htmlFor="service-price">Стоимость: </label>
+								<label className="uk-form-label" htmlFor="service-price">Цена (₽): </label>
 								<div className="uk-form-controls">
 									<input className="uk-input"
 										   id="service-price"

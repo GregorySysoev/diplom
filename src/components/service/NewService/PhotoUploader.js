@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone-uploader';
 import 'react-dropzone-uploader/dist/styles.css';
 
+const servicePhotoPath = '/service-service-photos';
+const foodPhotoPath = '/service-food-photos';
+
+const photoPath = foodPhotoPath;
+
 const PhotoUploader = ({ addPhoto, removePhoto, setMain, mainPhotoId, photoIds, lastPhotoId }) => {
     const dropzone = useRef(null);
 
@@ -19,7 +24,7 @@ const PhotoUploader = ({ addPhoto, removePhoto, setMain, mainPhotoId, photoIds, 
             {photoIds.map(id => <div key={id}>
                 <div className="uk-card uk-card-default">
                     <div className="uk-card-media-top uk-inline">
-                        <img src={`/service-photos/${id}.png`} alt={id}/> {/* TODO: не забыть поменять расширение! */}
+                        <img src={`${photoPath}/${id}.jpg`} alt={id}/>
 
                         {mainPhotoId !== id
                             ? <div className="uk-position-bottom-left uk-overlay" style={{ padding: '5px' }}>
