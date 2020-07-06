@@ -202,7 +202,7 @@ export default class Bed extends Component {
                     <form className="uk-width-2xlarge uk-margin">
                         {this.state.timeRanges.map(range =>
                             <div key={range.id}>
-                                <fieldset style={{ border: '1px dashed #ccc' }}>
+                                <fieldset style={{ border: '2px dashed #aaa' }}>
                                     <div style={{ position: 'relative' }}>
                                         <h5>Тип номера</h5>
                                         {this.state.timeRanges.length > 1 && (
@@ -256,12 +256,11 @@ export default class Bed extends Component {
                                         </div>
                                     </div>
                                     <div className="uk-margin">
-                                        <label className="uk-form-label">Типы спальных мест: </label>
+                                        {/*<label className="uk-form-label">Типы спальных мест: </label>*/}
                                         <ChooseBed />
                                     </div>
-                                    <br />
                                     <div className="uk-margin">
-                                        <label className="uk-form-label" htmlFor="roomsCount">Кол-во номеров: </label>
+                                        <label className="uk-form-label" htmlFor="roomsCount">Количество номеров: </label>
                                         <div className="uk-form-controls">
                                             <input className="uk-input"
                                                 id="roomsCount"
@@ -276,18 +275,17 @@ export default class Bed extends Component {
                                         </div>
                                     </div>
                                     <div className="uk-margin">
-                                        <label className="uk-form-label" htmlFor="availableRoomsCount">Кол-во свободных номеров: </label>
+                                        <label className="uk-form-label" htmlFor="availableRoomsCount">Количество свободных номеров: </label>
                                         <div className="uk-form-controls">
                                             <input className="uk-input"
                                                 id="availableRoomsCount"
                                                 name="availableRoomsCount"
                                                 type="number"
-                                                min={1}
+                                                min={0}
                                                 step={1}
-                                                defaultValue={1} />
+                                                defaultValue={0} />
                                         </div>
                                     </div>
-                                    <br />
                                     <div className="uk-margin">
                                         <label htmlFor="withFreeCancellation">
                                             Есть возможность бесплатной отмены брони:

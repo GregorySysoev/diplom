@@ -170,7 +170,7 @@ export default class ChooseBed extends Component {
         }));
     }
 
-    _createBed = (id, name = '', type = null, adultCapacity = 0, kidCapacity = 0) =>
+    _createBed = (id, name = '', type = null, adultCapacity = 0, kidCapacity = 1) =>
         ({ id, name, type, adultCapacity, kidCapacity })
 
     removeBed = id => {
@@ -186,7 +186,7 @@ export default class ChooseBed extends Component {
                     <div key={bed.id}>
                         <fieldset style={{ border: '1px dashed #ccc' }}>
                             <div style={{ position: 'relative' }}>
-                                <h5>Тип спального места</h5>
+                                <h5>Спальное место</h5>
                                 {this.state.beds.length > 1 && (
                                     <div style={{ position: 'absolute', top: '1px', right: '1px' }}>
                                         <a uk-icon="trash"
@@ -202,7 +202,7 @@ export default class ChooseBed extends Component {
                                 <Select
                                                 options={groupedBeds}
                                                 formatGroupLabel={formatGroupLabel}
-                                                placeholder="Введите типы спальных мест"
+                                                placeholder="Введите тип спального места"
                                                 noOptionsMessage={() => 'Такого типа спального места не найдено'}
                                             />
                                         
@@ -227,7 +227,7 @@ export default class ChooseBed extends Component {
                     </div>
                 )}
                 <div>
-                    <Button type="button" label="Добавить ещё тип спального места" onClick={this.addBed} />
+                    <Button type="button" label="Добавить ещё спальное место" onClick={this.addBed} />
                 </div>
             </div>
         )
