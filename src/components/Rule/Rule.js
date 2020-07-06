@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Button from "../Button"
-import Header from '../Header'
 
 export default class Bed extends Component {
     constructor(props) {
@@ -55,12 +54,12 @@ export default class Bed extends Component {
             <div>
                 <div className="uk-container uk-margin-top uk-margin-bottom">
                     <div className="uk-margin-top uk-margin-bottom">
-                        <a className="uk-link-muted" href="/service/new">Назад, к указанию скидок на типы номеров</a>
+                        <a className="uk-link-muted" href="/discount">Назад, к указанию скидок на типы номеров</a>
                     </div>
                     <div>
                         <p className="uk-text-bold">Укажите правила, предусмотренные гостиницей</p>
                     </div>
-                    <form className="uk-form-horizontal uk-child-width-1-1 uk-child-width-1-2@s">
+                    <form className="uk-width-2xlarge uk-margin">
                         {this.state.timeRanges.map(range =>
                             <div key={range.id}>
                                 <fieldset style={{ border: '1px dashed #ccc' }}>
@@ -104,10 +103,11 @@ export default class Bed extends Component {
                                             <select className="uk-select"
                                                 id="service-category"
                                                 name="category"
-                                                onChange={this.handleChange}>
-                                                <option disabled selected hidden value="">укажите номер по порядку</option>
-                                                <option value="0">1</option>
-                                                <option value="1">2</option>
+                                                onChange={this.handleChange}
+                                                defaultValue={range.id}>
+                                                {this.state.timeRanges.map(r => (
+                                                    <option key={r.id} value={r.id}>{r.id}</option>
+                                                ))}
                                             </select>
                                         </div>
                                     </div>
