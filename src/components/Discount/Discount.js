@@ -1,18 +1,22 @@
 import React, { Component } from 'react'
 import Button from "../Button"
-import Header from '../Header'
-import Select from 'react-select'
-import CreatableSelect from 'react-select/creatable';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
-const TypesOfNumber = [
-    { value: 'chocolate', label: 'Wi-fi' },
-    { value: 'strawberry', label: 'Телефон' },
-    { value: 'vanilla', label: 'Кондиционер' }
-]
+const roomTypes = [
+    {
+        id: 1,
+        name: 'Стандартный двухместный номер',
+    },
+    {
+        id: 2,
+        name: 'Двухместный номер Делюкс',
+    },
+    {
+        id: 3,
+        name: 'Улучшенный двухместный номер',
+    },
+];
 
-export default class Bed extends Component {
+export default class Discount extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -23,37 +27,11 @@ export default class Bed extends Component {
                     beginMinutes: 0,
                     endHour: 23,
                     endMinutes: 59,
-                    lastId: 1,
                 },
             ],
-            startDate: new Date(),
-            endDate: new Date()
+            lastId: 1,
         }
 
-    }
-
-
-    handleChangeStart = date => {
-        this.setState({
-            startDate: date
-        });
-    };
-
-    handleChangeEnd = date => {
-        this.setState({
-            endDate: date
-        });
-    };
-
-    handleChange = (id, fieldName, fieldValue) => {
-        this.setState(prevState => {
-            const rangeToChange = prevState.timeRanges.filter(range => range.id === id)[0] || null;
-            if (rangeToChange === null) {
-                return;
-            }
-            rangeToChange[fieldName] = fieldValue;
-            return { timeRanges: prevState.timeRanges };
-        });
     }
 
     addRange = () => {
@@ -81,12 +59,12 @@ export default class Bed extends Component {
             <div>
                 <div className="uk-container uk-margin-top uk-margin-bottom">
                     <div className="uk-margin-top uk-margin-bottom">
-                        <a className="uk-link-muted" href="/service/new">Назад, к указанию типов номеров</a>
+                        <a className="uk-link-muted" href="/number">Назад, к указанию типов номеров</a>
                     </div>
                     <div>
                         <p className="uk-text-bold">Укажите скидки на типы номеров</p>
                     </div>
-                    <form className="uk-form-horizontal uk-child-width-1-1 uk-child-width-1-2@s">
+                    <form className="uk-width-2xlarge uk-margin">
                         {this.state.timeRanges.map(range =>
                             <div key={range.id}>
                                 <fieldset style={{ border: '1px dashed #ccc' }}>
@@ -102,26 +80,24 @@ export default class Bed extends Component {
                                         )}
                                     </div>
                                     <div className="uk-margin">
-                                        <label className="uk-form-label" htmlFor="service-category">Тип номера: </label>
+                                        <label className="uk-form-label" htmlFor="type">Тип номера: </label>
                                         <div className="uk-form-controls">
                                             <select className="uk-select"
-                                                id="service-category"
-                                                name="category"
-                                                onChange={this.handleChange}>
-                                                <option disabled selected hidden value="">выберите тип номера</option>
-                                                <option value="0">Эконом</option>
-                                                <option value="1">Стандарт</option>
-                                                <option value="2">Премиум</option>
+                                                id="type">
+                                                <option disabled selected hidden value="">Выберите тип номера</option>
+                                                {roomTypes.map(type => (
+                                                    <option key={type.id} value={type.id}>{type.name}</option>
+                                                ))}
                                             </select>
                                         </div>
                                     </div>
                                     <div className="uk-margin">
-                                        <label className="uk-form-label" htmlFor="service-category">Процент скидки: </label>
+                                        <label className="uk-form-label" htmlFor="percent">Процент скидки: </label>
                                         <div className="uk-form-controls">
                                             <input className="uk-input"
+                                                id="percent"
                                                 name="endHour"
-                                                value={range.endHour}
-                                                onChange={event => this.handleChange(range.id, event.target.name, +event.target.value)}
+                                                defaultValue={10}
                                                 type="number"
                                                 step={1}
                                                 min={1}
@@ -129,22 +105,26 @@ export default class Bed extends Component {
                                         </div>
                                     </div>
                                     <div className="uk-margin">
-                                        <label className="uk-form-label" htmlFor="service-category">Дата начала: </label>
+                                        <label className="uk-form-label" htmlFor="startDate">Дата начала действия скидки: </label>
                                         <div className="uk-form-controls">
-                                            <DatePicker
-                                                selected={this.state.startDate}
-                                                onChange={this.handleChangeStart}
-                                                selectsStart
+                                            <input
+                                                type="date"
+                                                id="startDate"
+                                                className="uk-input"
+                                                defaultValue="2020-07-05"
+                                                min="2020-07-05"
                                             />
                                         </div>
                                     </div>
                                     <div className="uk-margin">
-                                        <label className="uk-form-label" htmlFor="service-category">Дата конца: </label>
+                                        <label className="uk-form-label" htmlFor="endDate">Дата окончания действия скидки: </label>
                                         <div className="uk-form-controls">
-                                            <DatePicker
-                                                selected={this.state.endDate}
-                                                onChange={this.handleChangeEnd}
-                                                selectsEnd
+                                            <input
+                                                type="date"
+                                                id="endDate"
+                                                className="uk-input"
+                                                defaultValue="2020-08-05"
+                                                min="2020-07-05"
                                             />
                                         </div>
                                     </div>
