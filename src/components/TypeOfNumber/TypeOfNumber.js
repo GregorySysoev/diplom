@@ -204,7 +204,7 @@ export default class Bed extends Component {
                             <div key={range.id}>
                                 <fieldset style={{ border: '2px dashed #aaa' }}>
                                     <div style={{ position: 'relative' }}>
-                                        <h5>Тип номера</h5>
+                                        <h4>Тип номера</h4>
                                         {this.state.timeRanges.length > 1 && (
                                             <div style={{ position: 'absolute', top: '1px', right: '1px' }}>
                                                 <a uk-icon="trash"
