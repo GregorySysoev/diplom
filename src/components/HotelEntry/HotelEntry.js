@@ -220,7 +220,7 @@ export default class HotelEntry extends React.Component {
 			<div>
 				<div className="uk-container uk-margin-top uk-margin-bottom">
 					<div className="uk-margin-top uk-margin-bottom">
-						<a className="uk-link-muted" href="#">Назад, к доступным действиям</a>
+						<a className="uk-link-muted" href="/actions">Назад, к доступным действиям</a>
 					</div>
 					<div>
 						<p className="uk-text-bold">Укажите основную информацию о гостинице</p>

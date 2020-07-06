@@ -111,6 +111,9 @@ function ServiceOrderListPage() {
 
     return (
         <div className="uk-container uk-margin-top uk-margin-bottom">
+            <div className="uk-margin-top">
+                <a className="uk-link-muted" href="/actions">Назад, к доступным действиям</a>
+            </div>
             <h2>Заказы услуг</h2>
             <div>
                 <div className="uk-margin uk-child-width-auto uk-flex uk-flex-column">

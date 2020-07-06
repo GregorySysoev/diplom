@@ -8,11 +8,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import * as orderStatuses from './statuses';
+import Typography from "@material-ui/core/Typography";
 
 const headCells = [
-    { id: 'name', label: '№ Заказа' },
-    { id: 'room', label: 'ФИО' },
-    { id: 'date', label: 'Дата' }
+    { id: 'name', label: 'Номер заказа' },
+    { id: 'room', label: 'Имя' },
+    { id: 'date', label: 'Дата создания заказа' },
 ];
 
 function createData(name, room, date) {
@@ -20,10 +21,10 @@ function createData(name, room, date) {
 }
 
 const pendingRows = [
-    createData('#2612', 'Сысоев Григорий Михайлович', '24.07.2020 11:53'),
+    // createData('№2', 'Константин Голуб', '05.07.2020 17:39'),
 ];
 const completedRows = [
-    createData('#123', 'Иванов Иван Иванович', '24.07.2020 10:00'),
+    // createData('№2', 'Константин Голуб', '05.07.2020 17:39'),
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -49,6 +50,8 @@ function Orders() {
         currentStatus === orderStatuses.PENDING
             ? pendingRows
             : currentStatus === orderStatuses.COMPLETED
+                ? completedRows
+                : [];
                 
     const handleOrderStatusChange = event => {
         setCurrentStatus(+event.target.value);
@@ -58,8 +61,8 @@ function Orders() {
 
     return (
         <div className="uk-container uk-margin-top uk-margin-bottom">
-            <div className="uk-margin-top uk-margin-bottom">
-                <a className="uk-link-muted" href="#">Назад, к доступным действиям</a>
+            <div className="uk-margin-top">
+                <a className="uk-link-muted" href="/actions">Назад, к доступным действиям</a>
             </div>
             <h2>Заказы</h2>
             <div>
@@ -97,7 +100,15 @@ function Orders() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rowsToDisplay.map((row, index) =>
+                                {rowsToDisplay.length === 0 ? (
+                                    <TableRow>
+                                        <TableCell>
+                                            <Typography variant="subheading" className={classes.emptyTitle}>
+                                                Пусто
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                ) : rowsToDisplay.map((row, index) =>
                                     <TableRow
                                         hover
                                         key={row.name}
